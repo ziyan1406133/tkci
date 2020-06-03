@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Model\Article;
+
+use App\User;
+Use App\Model\Article\Category;
+use Illuminate\Database\Eloquent\Model;
+
+class Article extends Model
+{
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'author_id');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
+}

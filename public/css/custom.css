@@ -1,0 +1,12 @@
+
+@media (min-width: 1200px) {
+    .header-desktop {
+        display: block !important;
+    }
+}
+
+@media (max-width: 1200px) {
+    .header-desktop {
+        display: none !important;
+    }
+}
