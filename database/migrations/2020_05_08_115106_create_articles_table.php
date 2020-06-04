@@ -21,7 +21,7 @@ class CreateArticlesTable extends Migration
             $table->string('status');
             $table->string('cover')->default('images/article/no_cover.jpg');
             $table->date('date');
-            $table->integer('author_id');
+            $table->bigInteger('author_id')->unsigned();
             $table->timestamps();
         });
     }

@@ -15,7 +15,7 @@ class CreateDonationsTable extends Migration
     {
         Schema::create('donations', function (Blueprint $table) {
             $table->id();
-            $table->integer('branch_id');
+            $table->bigInteger('branch_id')->unsigned();
             $table->date('date');
             $table->integer('year');
             $table->string('donator');

@@ -15,7 +15,7 @@ class CreateAccessoriesTable extends Migration
     {
         Schema::create('accessories', function (Blueprint $table) {
             $table->id();
-            $table->integer('seller_id');
+            $table->bigInteger('seller_id')->unsigned();
             $table->string('name');
             $table->string('price');
             $table->string('image');
