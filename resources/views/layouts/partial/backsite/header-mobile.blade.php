@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="header-mobile-inner">
                 <a class="logo" href="index.html">
-                    <img src="images/icon/logo.png" alt="CoolAdmin" />
+                    <img src="{{asset('images/icon/logo.png')}}" alt="CoolAdmin" />
                 </a>
                 <button class="hamburger hamburger--slider" type="button">
                     <span class="hamburger-box">
@@ -23,13 +23,13 @@
                         <i class="fas fa-newspaper"></i>Artikel</a>
                     <ul class="list-unstyled navbar-mobile-sub__list js-sub-list">
                         <li>
-                            <a href="#">Draft</a>
+                            <a href="{{route('my.drafts')}}">Draft</a>
                         </li>
                         <li>
-                            <a href="#">Artikel Saya</a>
+                            <a href="{{route('my.articles')}}">Artikel Saya</a>
                         </li>
                         <li>
-                            <a href="#">Semua Artikel</a>
+                            <a href="{{route('admin.artikel')}}">Semua Artikel</a>
                         </li>
                     </ul>
                 </li>

@@ -11,6 +11,6 @@ class Category extends Model
 
     public function articles()
     {
-        return $this->belongsToMany(Article::class);
+        return $this->belongsToMany(Article::class)->where('status', 'Published');
     }
 }

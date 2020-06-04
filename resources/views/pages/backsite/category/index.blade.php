@@ -42,7 +42,7 @@
                                 title="Edit Kategori Ini.">
                                 <i class="fa fa-pencil-alt"></i>
                             </a>
-                            <a class="btn btn-sm btn-danger"  data-toggle="modal" 
+                            <a class="btn btn-sm btn-danger" data-toggle="modal" 
                                 data-target="#deleteCategory_{{$category->id}}" 
                                 href="#" title="Hapus Kategori Ini.">
                                 <i class="fa fa-trash"></i>

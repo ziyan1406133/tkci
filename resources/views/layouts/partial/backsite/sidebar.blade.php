@@ -2,8 +2,8 @@
 <!-- MENU SIDEBAR-->
 <aside class="menu-sidebar d-none d-lg-block">
     <div class="logo">
-        <a href="#">
-            <img src="images/icon/logo.png" alt="Cool Admin" />
+        <a href="/dashboard">
+            <img src="{{asset('images/icon/logo.png')}}" alt="Cool Admin" />
         </a>
     </div>
     <div class="menu-sidebar__content js-scrollbar1">
@@ -14,13 +14,13 @@
                         <i class="fas fa-newspaper"></i>Artikel</a>
                     <ul class="list-unstyled navbar__sub-list js-sub-list">
                         <li>
-                            <a href="#">Draft</a>
+                            <a href="{{route('my.drafts')}}">Draft</a>
                         </li>
                         <li>
-                            <a href="#">Artikel Saya</a>
+                            <a href="{{route('my.articles')}}">Artikel Saya</a>
                         </li>
                         <li>
-                            <a href="#">Semua Artikel</a>
+                            <a href="{{route('admin.artikel')}}">Semua Artikel</a>
                         </li>
                     </ul>
                 </li>

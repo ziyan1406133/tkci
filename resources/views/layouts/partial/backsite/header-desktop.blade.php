@@ -11,24 +11,32 @@
                     <div class="noti-wrap">
                         <div class="noti__item js-item-menu">
                             <i class="fas fa-pencil-square-o"></i>
-                            <span class="quantity">1</span>
+                            <span class="quantity">{{$count_drafts}}</span>
                             <div class="notifi-dropdown js-dropdown">
                                 <div class="notifi__title">
-                                    <p>You have 1 Drafts. 
-                                        <a href="#" class="text-mute small">lihat semua</a>
+                                    <p>You have {{$count_drafts}} Drafts. 
+                                        <a href="{{route('my.drafts')}}" class="text-mute small">lihat semua</a>
                                     </p>
                                 </div>
-                                <div class="notifi__item">
-                                    <div class="bg-c1 img-cir img-40">
-                                        <i class="zmdi zmdi-email-open"></i>
+                                @foreach ($limit_drafts as $draft)
+                                    <div class="notifi__item">
+                                        <div class="bg-c1 img-cir img-40">
+                                            <i class="zmdi zmdi-email-open"></i>
+                                        </div>
+                                        <div class="content">
+                                            <p>{{$draft->title}}</p>
+                                            <span class="date">
+                                                @forelse ($draft->categories as $category)
+                                                    {{$category->name}} {{$loop->last ? '' : ','}}
+                                                @empty
+                                                    Uncategorized
+                                                @endforelse
+                                            </span>
+                                        </div>
                                     </div>
-                                    <div class="content">
-                                        <p>Judul Draft</p>
-                                        <span class="date">Tag 1, Tag 2, Tag Tag 3, Tag 4</span>
-                                    </div>
-                                </div>
+                                @endforeach
                                 <div class="notifi__footer">
-                                    <a href="#">Buat Artikel Baru</a>
+                                    <a href="{{route('artikel.create')}}">Buat Artikel Baru</a>
                                 </div>
                             </div>
                         </div>
@@ -48,7 +56,7 @@
                                             <i class="zmdi zmdi-account"></i>Profil Saya</a>
                                     </div>
                                     <div class="account-dropdown__item">
-                                        <a href="#">
+                                        <a href="{{route('my.articles')}}">
                                             <i class="zmdi zmdi-settings"></i>Artikel Saya</a>
                                     </div>
                                 </div>

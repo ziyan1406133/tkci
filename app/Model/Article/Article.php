@@ -13,7 +13,7 @@ class Article extends Model
         return $this->belongsTo(User::class, 'author_id');
     }
 
-    public function category()
+    public function categories()
     {
         return $this->belongsToMany(Category::class);
     }

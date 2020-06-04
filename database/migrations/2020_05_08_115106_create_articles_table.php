@@ -19,7 +19,7 @@ class CreateArticlesTable extends Migration
             $table->string('slug');
             $table->longText('content');
             $table->string('status');
-            $table->string('cover')->nullable();
+            $table->string('cover')->default('images/article/no_cover.jpg');
             $table->date('date');
             $table->integer('author_id');
             $table->timestamps();

@@ -15,8 +15,8 @@ class ArticleCategory extends Migration
     {
         Schema::create('article_category', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('article_id')->unsigned();
-            $table->integer('category_id')->unsigned();
+            $table->bigInteger('article_id')->unsigned();
+            $table->bigInteger('category_id')->unsigned();
             $table->timestamps();
         });
     }
