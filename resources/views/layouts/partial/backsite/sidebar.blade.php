@@ -25,7 +25,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{{route('kategori.index')}}">
                         <i class="fas fa-tags"></i>Kategori Artikel
                     </a>
                 </li>

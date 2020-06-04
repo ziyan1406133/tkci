@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Article;
 
 use App\Http\Controllers\Controller;
+use App\Model\Article\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -24,7 +26,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::orderBy('name')->get();
+
+        return view('pages.backsite.category.index', compact('categories'));
     }
 
     /**
@@ -45,7 +49,15 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $name = $request->name;
+        $slug = Str::slug($name, '-');
+
+        $category = new Category;
+        $category->name = $name;
+        $category->slug = $slug;
+        $category->save();
+
+        return redirect()->route('kategori.index')->with('success', 'Kategori Berhasil Ditambahkan');
     }
 
     /**
@@ -79,7 +91,15 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $name = $request->name;
+        $slug = Str::slug($name, '-');
+
+        $category = Category::findOrFail($id);
+        $category->name = $request->name;
+        $category->slug = $slug;
+        $category->save();
+
+        return redirect()->route('kategori.index')->with('success', 'Kategori Berhasil Diperbaharui');
     }
 
     /**
@@ -90,6 +110,9 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        $category->delete();
+
+        return redirect()->route('kategori.index')->with('success', 'Kategori Berhasil Dihapus');
     }
 }

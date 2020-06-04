@@ -2,6 +2,7 @@
 
 use App\Model\Article\Category;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class CategorySeeder1 extends Seeder
 {
@@ -12,14 +13,18 @@ class CategorySeeder1 extends Seeder
      */
     public function run()
     {
+        $name = 'Pengumuman';
         $data = new Category;
         $data->id = '1';
-        $data->name = 'Pengumuman';
+        $data->name = $name;
+        $data->slug = Str::slug($name, '-');
         $data->save();
 
+        $name = 'Kajian Islami';
         $data = new Category;
         $data->id = '2';
-        $data->name = 'Kajian Islami';
+        $data->name = $name;
+        $data->slug = Str::slug($name, '-');
         $data->save();
     }
 }

@@ -43,6 +43,7 @@
             <!-- MAIN CONTENT-->
             <div class="main-content">
                 <div class="container-fluid">
+                    @include('layouts.partial.backsite.alert')
                     @yield('content')
                     <div class="copyright">
                         <p>

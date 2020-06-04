@@ -21,7 +21,6 @@ class CreateArticlesTable extends Migration
             $table->string('status');
             $table->string('cover')->nullable();
             $table->date('date');
-            $table->integer('category_id');
             $table->integer('author_id');
             $table->timestamps();
         });
