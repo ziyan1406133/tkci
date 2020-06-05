@@ -70,24 +70,13 @@
                         </li>
                     </ul>
                 </li>
-                <li class="has-sub">
-                    <a class="js-arrow" href="#">
-                        <i class="fas fa-user"></i>{{auth()->user()->name}}</a>
-                    <ul class="list-unstyled navbar-mobile-sub__list js-sub-list">
-                        <li>
-                            <a href="index2.html">Profil Saya</a>
-                        </li>
-                        <li>
-                            <a href="index.html">Artikel Saya</a>
-                        </li>
-                        <li>
-                            <a href="index2.html">Buat Artikel Baru</a>
-                        </li>
-                        <li>
-                            <a href="index2.html">Logout</a>
-                        </li>
-                    </ul>
-                </li>
+                @if (auth()->user()->role == 'Super Admin')
+                    <li>
+                        <a href="{{route('admin.index')}}">
+                            <i class="fas fa-user"></i> Administrator
+                        </a>
+                    </li>
+                @endif
             </ul>
         </div>
     </nav>

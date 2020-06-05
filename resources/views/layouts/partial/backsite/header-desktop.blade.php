@@ -4,14 +4,20 @@
     <div class="section__content section__content--p30">
         <div class="container-fluid">
             <div class="header-wrap">
-                <form class="form-header">
-                    {{-- empty space --}}
+                <form class="form-header" action="" method="POST">
+                    <input class="au-input au-input--xl" type="text" name="search" 
+                    placeholder="Cari Artikel..." />
+                    <button class="au-btn--submit" type="submit">
+                        <i class="zmdi zmdi-search"></i>
+                    </button>
                 </form>
                 <div class="header-button">
                     <div class="noti-wrap">
                         <div class="noti__item js-item-menu">
                             <i class="zmdi zmdi-comment-more"></i>
-                            <span class="quantity">{{$count_drafts}}</span>
+                            @if ($count_drafts > 0)
+                                <span class="quantity">{{$count_drafts}}</span>
+                            @endif
                             <div class="notifi-dropdown js-dropdown">
                                 <div class="notifi__title">
                                     <p>You have {{$count_drafts}} Drafts. 
@@ -61,8 +67,15 @@
                                     </div>
                                 </div>
                                 <div class="account-dropdown__footer">
-                                    <a href="#">
-                                        <i class="zmdi zmdi-power"></i>Logout</a>
+                                    <a  href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                                        <i class="zmdi zmdi-power"></i>Logout
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
                                 </div>
                             </div>
                         </div>

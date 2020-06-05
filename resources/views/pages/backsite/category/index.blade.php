@@ -18,7 +18,7 @@
                 <tr>
                     <th>No</th>
                     <th>Nama Kategori</th>
-                    <th>Jumlah Post</th>
+                    <th>Jumlah Artikel</th>
                     <th>Opsi</th>
                 </tr>
             </thead>
@@ -58,4 +58,12 @@
         @include('pages.backsite.category.modal.delete')
     @endforeach
     @include('pages.backsite.category.modal.add')
+@endsection
+
+@section('js')
+    <script>
+        $(document).ready(function() {
+            $('.table-data3').DataTable();
+        } );
+    </script>
 @endsection

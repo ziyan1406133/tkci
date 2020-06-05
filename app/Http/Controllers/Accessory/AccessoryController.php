@@ -28,7 +28,7 @@ class AccessoryController extends Controller
      */
     public function admin_index()
     {
-        $accessories = Accessory::orderBy('created_at', 'desc')->paginate(10);
+        $accessories = Accessory::orderBy('created_at', 'desc')->get();
 
         return view('pages.backsite.accessory.index', compact('accessories'));
     }

@@ -53,7 +53,6 @@
             </tbody>
         </table>
     </div>
-    {{$sellers->links()}}
     @foreach ($sellers as $seller)
         @include('pages.backsite.seller.modal.delete')
     @endforeach
@@ -61,4 +60,12 @@
 @else
     <p class="text-muted">Belum ada seller yang terdaftar.</p>
 @endif
+@endsection
+
+@section('js')
+    <script>
+        $(document).ready(function() {
+            $('.table-data3').DataTable();
+        } );
+    </script>
 @endsection

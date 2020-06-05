@@ -53,7 +53,6 @@
             </tbody>
         </table>
     </div>
-    {{$accessories->links()}}
     @foreach ($accessories as $accessory)
         @include('pages.backsite.accessory.modal.delete')
     @endforeach
@@ -61,4 +60,12 @@
 @else
     <p class="text-muted">Belum ada accessory yang terdaftar.</p>
 @endif
+@endsection
+
+@section('js')
+    <script>
+        $(document).ready(function() {
+            $('.table-data3').DataTable();
+        } );
+    </script>
 @endsection

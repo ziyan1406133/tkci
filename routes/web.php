@@ -22,6 +22,7 @@ Auth::routes();
 Route::get('/dashboard', 'DashboardController@index')->name('admin.dashboard');
 Route::resource('artikel', 'Article\ArticleController');
 Route::get('/daftar_artikel', 'Article\ArticleController@admin_index')->name('admin.artikel');
+Route::get('/daftar_artikel/{username}', 'Article\ArticleController@admin_article_index')->name('admins.article');
 Route::get('/artikel_saya', 'Article\ArticleController@my_articles')->name('my.articles');
 Route::get('/draft_saya', 'Article\ArticleController@my_drafts')->name('my.drafts');
 
@@ -31,4 +32,4 @@ Route::resource('seller', 'Accessory\SellerController');
 Route::get('/daftar_seller', 'Accessory\SellerController@admin_index')->name('admin.seller');
 Route::resource('aksesoris', 'Accessory\AccessoryController');
 Route::get('/daftar_aksesoris', 'Accessory\AccessoryController@admin_index')->name('admin.aksesoris');
-
+Route::resource('admin', 'UserController');

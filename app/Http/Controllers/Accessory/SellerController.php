@@ -27,7 +27,7 @@ class SellerController extends Controller
      */
     public function admin_index()
     {
-        $sellers = Seller::orderBy('created_at', 'desc')->paginate(10);
+        $sellers = Seller::orderBy('created_at', 'desc')->get();
 
         return view('pages.backsite.seller.index', compact('sellers'));
     }

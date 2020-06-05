@@ -30,16 +30,31 @@
                 placeholder="No. HP" name="phone" id="phone">
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" value="{{$seller->facebook}}"
-                placeholder="Link Akun Facebook" name="facebook" id="facebook">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                    facebook.com/
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username Facebook" 
+                    name="facebook" id="facebook" value="{{ $seller->facebook }}">
+                </div>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" value="{{ $seller->instagram }}"
-                placeholder="Link Akun Instagram" name="instagram" id="instagram">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                    twitter.com/
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username Twitter" 
+                    name="twitter" id="twitter" value="{{ $seller->twitter }}">
+                </div>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" value="{{ $seller->twitter }}"
-                placeholder="Link Akun Twitter" name="twitter" id="twitter">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                    instagram.com/
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username Instagram"
+                    name="instagram" id="instagram" value="{{ $seller->instagram }}">
+                </div>
             </div>
             <div class="form-group">
                 <label class="form-control-label">Gambar</label>

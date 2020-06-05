@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Article;
 use App\Http\Controllers\Controller;
 use App\Model\Article\Article;
 use App\Model\Article\Category;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -42,6 +43,23 @@ class ArticleController extends Controller
         $articles = Article::orderBy('created_at', 'desc')->where('status', 'Published')->paginate(9);
 
         $page = 'Semua Artikel';
+        return view('pages.backsite.article.index', compact('articles', 'page'));
+    }
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function admin_article_index($username)
+    {
+        $admin = User::where('username', $username)->first();
+       
+        $articles_paginated =  $admin->setRelation('published_articles_paginated', $admin->published_articles()->paginate(9));
+        $articles = $admin->published_articles_paginated;
+
+        $page = 'Artikel <a href="'.route('admin.show', $username).'">@'.$username.'</a>';
         return view('pages.backsite.article.index', compact('articles', 'page'));
     }
 

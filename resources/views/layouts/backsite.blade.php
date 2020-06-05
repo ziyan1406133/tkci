@@ -25,8 +25,8 @@
     <link href="{{asset('vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css')}}" rel="stylesheet" media="all">
     <link href="{{asset('vendor/css-hamburgers/hamburgers.min.css')}}" rel="stylesheet" media="all">
     <link href="{{asset('vendor/perfect-scrollbar/perfect-scrollbar.css')}}" rel="stylesheet" media="all">
-    <link href="{{asset('vendor/perfect-scrollbar/perfect-scrollbar.css')}}" rel="stylesheet" media="all">
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+    <link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet" type="text/css"/>
 
     <!-- Main CSS-->
     <link href="{{asset('css/theme.css')}}" rel="stylesheet" media="all">
@@ -66,6 +66,7 @@
     <script src="{{asset('vendor/animsition/animsition.min.js')}}"></script>
     <script src="{{asset('vendor/perfect-scrollbar/perfect-scrollbar.js')}}"></script>
     <script src="{{asset('vendor/summernote/summernote-bs4.min.js')}}"></script>
+    <script src="{{ asset('js/datatables.min.js') }}" type="text/javascript"></script>
 
     <!-- Main JS-->
     <script src="{{asset('js/main.js')}}"></script>

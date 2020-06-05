@@ -8,7 +8,7 @@
             <i class="fa fa-plus"></i>
         </a>
     </div>
-    <h4>{{$page}}</h4>
+    <h4>{!! $page !!}</h4>
 </div>
 <div class="card-columns">
     @forelse ($articles as $article)
@@ -25,7 +25,9 @@
             </p>
             <p class="card-text">
                 <small class="text-muted">
-                    {{date_format(date_create($article->date), 'd M Y')}}{{$page == 'Semua Artikel' ? ', oleh @'.$article->author->username : ''}}
+                    {{date_format(date_create($article->date), 'd M Y')}}{!! $page == 'Semua Artikel' ? ', 
+                    oleh <a href="'.route('admin.show', $article->author->username).'">@'
+                    .$article->author->username.'</a>' : ''!!}
                 </small>
             </p>
             <p class="card-text">
@@ -56,7 +58,7 @@
         <p class="text-muted">Tidak ada apapun disini, silahkan buat artikel.</p>
     @endforelse
 </div>
-<div class="text-center">
+<div class="pull-right">
     {{$articles->links()}}
 </div>
 @endsection

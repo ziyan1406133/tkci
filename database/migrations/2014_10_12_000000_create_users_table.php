@@ -23,6 +23,9 @@ class CreateUsersTable extends Migration
             $table->string('bio')->nullable();
             $table->string('role')->default('Administrator');
             $table->string('image')->default('images/user/no_avatar.png');
+            $table->string('facebook')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('twitter')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
