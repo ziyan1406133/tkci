@@ -31,6 +31,7 @@
                 </div>
                 <div class="card-body">
                     <input type="file" name="cover" class="form-control-file">
+                    <img src="{{ asset($article->cover) }}" alt="cover" width="50%">
                 </div>
             </div>
             <div class="card">
@@ -59,7 +60,7 @@
         $(document).ready(function() {
             $('#content').summernote({
                 placeholder: 'Isi Konten Artikel',
-                height: 300
+                height: 400
             });
         });
     </script>

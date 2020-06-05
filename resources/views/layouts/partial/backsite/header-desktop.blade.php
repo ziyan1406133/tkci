@@ -10,7 +10,7 @@
                 <div class="header-button">
                     <div class="noti-wrap">
                         <div class="noti__item js-item-menu">
-                            <i class="fas fa-pencil-square-o"></i>
+                            <i class="zmdi zmdi-comment-more"></i>
                             <span class="quantity">{{$count_drafts}}</span>
                             <div class="notifi-dropdown js-dropdown">
                                 <div class="notifi__title">
@@ -21,7 +21,7 @@
                                 @foreach ($limit_drafts as $draft)
                                     <div class="notifi__item">
                                         <div class="bg-c1 img-cir img-40">
-                                            <i class="zmdi zmdi-email-open"></i>
+                                            <i class="fa fa-newspaper"></i>
                                         </div>
                                         <div class="content">
                                             <p>{{$draft->title}}</p>
@@ -57,7 +57,7 @@
                                     </div>
                                     <div class="account-dropdown__item">
                                         <a href="{{route('my.articles')}}">
-                                            <i class="zmdi zmdi-settings"></i>Artikel Saya</a>
+                                            <i class="zmdi zmdi-file-text"></i>Artikel Saya</a>
                                     </div>
                                 </div>
                                 <div class="account-dropdown__footer">

@@ -54,10 +54,10 @@
                         <i class="fas fa-shopping-bag"></i>Seller & Aksesoris</a>
                     <ul class="list-unstyled navbar__sub-list js-sub-list">
                         <li>
-                            <a href="#">Daftar Seller</a>
+                            <a href="{{route('admin.seller')}}">Daftar Seller</a>
                         </li>
                         <li>
-                            <a href="#">Daftar Aksesoris</a>
+                            <a href="{{route('admin.aksesoris')}}">Daftar Aksesoris</a>
                         </li>
                     </ul>
                 </li>

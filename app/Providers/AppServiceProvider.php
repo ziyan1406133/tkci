@@ -32,18 +32,20 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('*', function($view) use ($auth) {
             $user = $auth->user();
             
-            $drafts = Article::orderBy('created_at', 'desc')
-                ->where('status', 'Draft')
-                ->where('author_id', $user->id)->get();
-
-            $count_drafts = count($drafts);
-
-            $limit_drafts = Article::orderBy('created_at', 'desc')
-                        ->where('status', 'Draft')
-                        ->where('author_id', $user->id)->limit(5)->get();
-
-            View::share('count_drafts', $count_drafts);
-            View::share('limit_drafts', $limit_drafts);
+            if ($user) {
+                $drafts = Article::orderBy('created_at', 'desc')
+                    ->where('status', 'Draft')
+                    ->where('author_id', $user->id)->get();
+    
+                $count_drafts = count($drafts);
+    
+                $limit_drafts = Article::orderBy('created_at', 'desc')
+                            ->where('status', 'Draft')
+                            ->where('author_id', $user->id)->limit(5)->get();
+    
+                View::share('count_drafts', $count_drafts);
+                View::share('limit_drafts', $limit_drafts);
+            }
         });
     }
 }

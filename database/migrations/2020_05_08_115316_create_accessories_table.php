@@ -17,8 +17,10 @@ class CreateAccessoriesTable extends Migration
             $table->id();
             $table->bigInteger('seller_id')->unsigned();
             $table->string('name');
+            $table->string('slug');
+            $table->longText('description')->nullable();
             $table->string('price');
-            $table->string('image');
+            $table->string('image')->default('images/article/no_cover.jpg');
             $table->timestamps();
         });
     }
