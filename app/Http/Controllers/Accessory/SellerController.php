@@ -133,6 +133,12 @@ class SellerController extends Controller
         $seller->instagram = $request->instagram;
         $seller->twitter = $request->twitter;
         if($request->hasFile('image')){
+            if($seller->image !== 'images/user/no_avatar.png') {
+                $file = public_path($seller->image);
+                if (file_exists($file)) {
+                    unlink($file);
+                }
+            }
             $filenameWithExt = $request->file('image')->getClientOriginalName();
             $filename = pathInfo($filenameWithExt, PATHINFO_FILENAME);
             $extension = $request->file('image')->getClientOriginalExtension();

@@ -33,3 +33,7 @@ Route::get('/daftar_seller', 'Accessory\SellerController@admin_index')->name('ad
 Route::resource('aksesoris', 'Accessory\AccessoryController');
 Route::get('/daftar_aksesoris', 'Accessory\AccessoryController@admin_index')->name('admin.aksesoris');
 Route::resource('admin', 'UserController');
+Route::resource('gallery', 'Gallery\GalleryController');
+Route::get('/lihat_gallery', 'Gallery\GalleryController@admin_index')->name('admin.gallery');
+Route::get('/lihat_gallery/{slug}', 'Gallery\GalleryController@admin_show')->name('admin.show.gallery');
+Route::resource('image', 'Gallery\ImageController');

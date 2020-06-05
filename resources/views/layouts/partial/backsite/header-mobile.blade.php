@@ -39,7 +39,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{{ route('admin.gallery') }}">
                         <i class="fas fa-images"></i>Galeri
                     </a>
                 </li>

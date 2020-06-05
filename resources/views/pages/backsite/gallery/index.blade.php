@@ -3,22 +3,23 @@
 @section('content')
 <div class="mb-4">
     <div class="pull-right">
-        <a href="{{route('seller.create')}}" class="btn btn-md btn-primary" 
-            title="Tambah Seller.">
+        <a href="#" data-toggle="modal" 
+            data-target="#addGallery"
+            class="btn btn-md btn-primary" 
+            title="Tambah Gallery.">
             <i class="fa fa-plus"></i>
         </a>
     </div>
-    <h4>Daftar Seller</h4>
+    <h4>Daftar Galeri</h4>
 </div>
 
-@if (count($sellers) > 0)
+@if (count($galleries) > 0)
     <div class="table-responsive m-b-40">
         <table class="table table-borderless table-data3">
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>Nama Seller</th>
-                    <th>Kode Seller</th>
+                    <th>Judul Galeri</th>
                     <th>Jumlah Aksesoris</th>
                     <th>Opsi</th>
                 </tr>
@@ -27,23 +28,23 @@
                 @php
                     $no = 1;
                 @endphp
-                @foreach ($sellers as $seller)
+                @foreach ($galleries as $gallery)
                     <tr>
                         <td>{{$no++}}</td>
-                        <td>{{$seller->name}}</td>
-                        <td>{{$seller->code}}</td>
-                        <td>{{count($seller->accessories)}}</td>
+                        <td>{{$gallery->name}}</td>
+                        <td>{{count($gallery->images) + 1}}</td>
                         <td>
                             <a class="btn btn-sm btn-info"  
-                                href="#" title="Lihat Info Seller Ini.">
+                                href="{{ route('admin.show.gallery', $gallery->slug) }}" title="Lihat Info Seller Ini.">
                                 <i class="fa fa-info"></i>
                             </a>
-                            <a class="btn btn-sm btn-warning"  
-                                href="{{ route('seller.edit', $seller->id) }}" title="Edit Seller Ini.">
+                            <a class="btn btn-sm btn-warning" href="#" data-toggle="modal" 
+                                data-target="#editGallery_{{$gallery->id}}"
+                                title="Edit Seller Ini.">
                                 <i class="fa fa-pencil-alt"></i>
                             </a>
                             <a class="btn btn-sm btn-danger" data-toggle="modal" 
-                                data-target="#deleteSeller_{{$seller->id}}" 
+                                data-target="#deleteGallery_{{$gallery->id}}" 
                                 href="#" title="Hapus Seller Ini.">
                                 <i class="fa fa-trash"></i>
                             </a>
@@ -53,12 +54,14 @@
             </tbody>
         </table>
     </div>
-    @foreach ($sellers as $seller)
-        @include('pages.backsite.seller.modal.delete')
+    @foreach ($galleries as $gallery)
+        @include('pages.backsite.gallery.modal.edit')
+        @include('pages.backsite.gallery.modal.delete')
     @endforeach
 @else
-    <p class="text-muted">Belum ada seller yang terdaftar.</p>
+    <p class="text-muted">Belum ada gallery yang dibuat.</p>
 @endif
+@include('pages.backsite.gallery.modal.add')
 @endsection
 
 @section('js')

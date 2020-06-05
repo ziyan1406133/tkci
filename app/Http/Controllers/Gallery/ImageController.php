@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Gallery;
 
 use App\Http\Controllers\Controller;
+use App\Model\Gallery\Image;
+use App\Model\Gallery\Gallery;
 use Illuminate\Http\Request;
 
 class ImageController extends Controller
@@ -34,7 +36,7 @@ class ImageController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {            
         //
     }
 
@@ -69,7 +71,26 @@ class ImageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $gallery = Gallery::findOrFail($id);
+        foreach ($request->file('images') as $item) {
+
+            $image = new Image;
+            $filenameWithExt = $item->getClientOriginalName();
+            $filename = pathInfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $item->getClientOriginalExtension();
+            $FileNameToStore = $filename.'_'.time().'_.'.$extension;
+            $path = public_path('images/gallery_image/');
+            $item->move($path, $FileNameToStore);
+    
+            //$path = $request->file('image')->storeAs('public/package/', $FileNameToStore);
+    
+            $image->image = "images/gallery_image/".$FileNameToStore;
+            $image->gallery_id = $id;
+            $image->save();
+
+        }
+
+        return redirect()->route('admin.show.gallery', $gallery->slug)->with('success', 'Gambar berhasil ditambahkan');
     }
 
     /**
@@ -80,6 +101,16 @@ class ImageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $image = Image::findOrFail($id);
+        $slug = $image->gallery->slug;
+
+        $file = public_path($image->image);
+        if (file_exists($file)) {
+            unlink($file);
+        }
+
+        $image->delete();
+
+        return redirect()->route('admin.show.gallery', $slug)->with('success', 'Gambar berhasil dihapus');
     }
 }

@@ -130,6 +130,13 @@ class AccessoryController extends Controller
         $accessory->description = $request->description;
         $accessory->seller_id = $request->seller_id;
         if($request->hasFile('image')){
+
+            if($accessory->image !== 'images/article/no_cover.png') {
+                $file = public_path($accessory->image);
+                if (file_exists($file)) {
+                    unlink($file);
+                }
+            }
             $filenameWithExt = $request->file('image')->getClientOriginalName();
             $filename = pathInfo($filenameWithExt, PATHINFO_FILENAME);
             $extension = $request->file('image')->getClientOriginalExtension();

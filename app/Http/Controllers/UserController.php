@@ -180,6 +180,12 @@ class UserController extends Controller
         $admin->twitter = $request->twitter;
         $admin->instagram = $request->instagram;
         if($request->hasFile('image')){
+            if($admin->image !== 'images/user/no_avatar.png') {
+                $file = public_path($admin->image);
+                if (file_exists($file)) {
+                    unlink($file);
+                }
+            }
             $filenameWithExt = $request->file('image')->getClientOriginalName();
             $filename = pathInfo($filenameWithExt, PATHINFO_FILENAME);
             $extension = $request->file('image')->getClientOriginalExtension();

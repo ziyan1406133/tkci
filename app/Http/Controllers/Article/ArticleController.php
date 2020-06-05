@@ -215,6 +215,14 @@ class ArticleController extends Controller
             $article->status = 'Draft';
         }
         if($request->hasFile('cover')){
+            
+            if($article->cover !== 'images/article/no_cover.png') {
+                $file = public_path($article->cover);
+                if (file_exists($file)) {
+                    unlink($file);
+                }
+            }
+    
             $filenameWithExt = $request->file('cover')->getClientOriginalName();
             $filename = pathInfo($filenameWithExt, PATHINFO_FILENAME);
             $extension = $request->file('cover')->getClientOriginalExtension();

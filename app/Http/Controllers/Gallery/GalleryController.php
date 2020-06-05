@@ -3,10 +3,23 @@
 namespace App\Http\Controllers\Gallery;
 
 use App\Http\Controllers\Controller;
+use App\Model\Gallery\Gallery;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class GalleryController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth', $except = ['show', 'index']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,6 +29,19 @@ class GalleryController extends Controller
     {
         //
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function admin_index()
+    {
+        $galleries = Gallery::orderBy('created_at', 'desc')->get();
+
+        return view('pages.backsite.gallery.index', compact('galleries'));
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -35,7 +61,29 @@ class GalleryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $name = $request->name;
+        $slug = Str::slug($name, '-');
+
+        $gallery = new Gallery;
+        $gallery->name = $name;
+        $gallery->slug = $slug;
+        $gallery->author_id = Auth::user()->id;
+        
+        $filenameWithExt = $request->file('cover')->getClientOriginalName();
+        $filename = pathInfo($filenameWithExt, PATHINFO_FILENAME);
+        $extension = $request->file('cover')->getClientOriginalExtension();
+        $FileNameToStore = $filename.'_'.time().'_.'.$extension;
+        $path = public_path('images/gallery/');
+        $request->file('cover')->move($path, $FileNameToStore);
+
+        //$path = $request->file('image')->storeAs('public/package/', $FileNameToStore);
+
+        $gallery->cover = "images/gallery/".$FileNameToStore;
+        $gallery->save();
+
+        return redirect()->route('admin.gallery')
+            ->with('success', 'Galeri Berhasil Dibuat, silahkan tambahkan 
+            gambar galeri tersebut <a href="'.route('admin.show.gallery', $slug).'">di sini</a>');
     }
 
     /**
@@ -47,6 +95,19 @@ class GalleryController extends Controller
     public function show($id)
     {
         //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function admin_show($slug)
+    {
+        $gallery = Gallery::where('slug', $slug)->first();
+
+        return view('pages.backsite.gallery.show', compact('gallery'));
     }
 
     /**
@@ -69,7 +130,35 @@ class GalleryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $name = $request->name;
+        $slug = Str::slug($name, '-');
+
+        $gallery = Gallery::findOrFail($id);
+        $gallery->name = $name;
+        $gallery->slug = $slug;
+        
+        if($request->hasFile('cover')){
+
+            $file = public_path($gallery->cover);
+            if (file_exists($file)) {
+                unlink($file);
+            }
+
+            $filenameWithExt = $request->file('cover')->getClientOriginalName();
+            $filename = pathInfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('cover')->getClientOriginalExtension();
+            $FileNameToStore = $filename.'_'.time().'_.'.$extension;
+            $path = public_path('images/gallery/');
+            $request->file('cover')->move($path, $FileNameToStore);
+
+            //$path = $request->file('image')->storeAs('public/package/', $FileNameToStore);
+
+            $gallery->cover = "images/gallery/".$FileNameToStore;
+        }
+        $gallery->save();
+
+        return redirect()->route('admin.show.gallery', $slug)
+            ->with('success', 'Galeri Berhasil Diperbaharui');
     }
 
     /**
@@ -80,6 +169,21 @@ class GalleryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $gallery = Gallery::findOrFail($id);
+        
+        $file = public_path($gallery->cover);
+        if (file_exists($file)) {
+            unlink($file);
+        }
+        foreach ($gallery->images as $image) {
+            $file = public_path($image->image);
+            if (file_exists($file)) {
+                unlink($file);
+            }
+        }
+        $gallery->delete();
+        
+        return redirect()->route('admin.gallery')
+            ->with('success', 'Galeri Berhasil Dihapus');
     }
 }

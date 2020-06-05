@@ -15,7 +15,9 @@ class CreateGalleriesTable extends Migration
     {
         Schema::create('galleries', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('author_id')->unsigned();
             $table->string('name');
+            $table->string('slug');
             $table->string('cover');
             $table->timestamps();
         });
