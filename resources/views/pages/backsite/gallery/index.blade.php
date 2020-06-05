@@ -20,7 +20,8 @@
                 <tr>
                     <th>No</th>
                     <th>Judul Galeri</th>
-                    <th>Jumlah Aksesoris</th>
+                    <th>Dibuat Oleh</th>
+                    <th>Jumlah Gambar</th>
                     <th>Opsi</th>
                 </tr>
             </thead>
@@ -32,6 +33,7 @@
                     <tr>
                         <td>{{$no++}}</td>
                         <td>{{$gallery->name}}</td>
+                        <td>{{$gallery->author->username}}</td>
                         <td>{{count($gallery->images) + 1}}</td>
                         <td>
                             <a class="btn btn-sm btn-info"  
