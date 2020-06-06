@@ -130,6 +130,14 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'cover' => 'image|max:1999',
+        ],
+        [
+            'cover.image' => 'File yang diupload harus berupa gambar',
+            'max' => 'Maksimum ukuran file yang diupload adalah 2 MB'
+        ]);
+
         $draft = $request->draft;
         $title = $request->title;
 
@@ -217,14 +225,20 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'cover' => 'image|max:1999',
+        ],
+        [
+            'cover.image' => 'File yang diupload harus berupa gambar',
+            'max' => 'Maksimum ukuran file yang diupload adalah 2 MB'
+        ]);
+        
         $draft = $request->draft;
         $title = $request->title;
 
-        $getArticle = Article::findOrFail($id);
-        $article = $getArticle->replicate();
-        $article->save();
-        
+        $article = Article::findOrFail($id);
         $article->categories()->detach();
+        
         $article->title = $title;
         // $article->slug = Str::slug($title, '-');
         $article->content = $request->content;

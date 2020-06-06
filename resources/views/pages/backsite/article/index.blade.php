@@ -27,7 +27,7 @@
             </p>
             <p class="card-text">
                 <small class="text-muted">
-                    {{date_format(date_create($article->date), 'd M Y')}}{!! $page == 'Semua Artikel' ? ', 
+                    {{date_format(date_create($article->date), 'd M Y')}}{!! ($page == 'Semua Artikel') || ($page == 'Hasil Pencarian') ? ', 
                     oleh <a href="'.route('admin.show', $article->author->username).'">@'
                     .$article->author->username.'</a>' : ''!!}
                 </small>

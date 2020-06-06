@@ -48,13 +48,13 @@
                         <i class="fas fa-code-branch"></i>Cabang TKCI</a>
                     <ul class="list-unstyled navbar-mobile-sub__list js-sub-list">
                         <li>
-                            <a href="#">Daftar Cabang</a>
+                            <a href="{{ route('admin.cabang') }}">Daftar Cabang</a>
                         </li>
                         <li>
-                            <a href="#">Info Donasi</a>
+                            <a href="{{ route('admin.donation') }}">Info Donasi</a>
                         </li>
                         <li>
-                            <a href="#">Sebaran Lokasi</a>
+                            <a href="{{ route('branch.map') }}">Sebaran Lokasi</a>
                         </li>
                     </ul>
                 </li>

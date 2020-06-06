@@ -59,7 +59,7 @@
                             <div class="account-dropdown js-dropdown">
                                 <div class="account-dropdown__body">
                                     <div class="account-dropdown__item">
-                                        <a href="#">
+                                        <a href="{{ route('admin.show', auth()->user()->username) }}">
                                             <i class="zmdi zmdi-account"></i>Profil Saya</a>
                                     </div>
                                     <div class="account-dropdown__item">

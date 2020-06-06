@@ -123,10 +123,7 @@ class SellerController extends Controller
     {
         $name = $request->name;
 
-        $getSeller = Seller::findOrFail($id);
-        $seller = $getSeller->replicate();
-        $seller->save();
-
+        $seller = Seller::findOrFail($id);
         $seller->name = $name;
         // $seller->slug = Str::slug($name, '-');
         $seller->code = $request->code;

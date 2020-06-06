@@ -12,7 +12,7 @@
                 <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-addon">
-                        facebook.com/
+                            <span class="zmdi zmdi-facebook"></span>
                         </div>
                         <input type="text" class="form-control" placeholder="Username Facebook" name="facebook" id="facebook">
                     </div>
@@ -20,7 +20,7 @@
                 <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-addon">
-                        twitter.com/
+                            <span class="zmdi zmdi-twitter"></span>
                         </div>
                         <input type="text" class="form-control" placeholder="Username Twitter" name="twitter" id="twitter">
                     </div>
@@ -28,10 +28,11 @@
                 <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-addon">
-                        instagram.com/
+                            <span class="zmdi zmdi-instagram"></span>
                         </div>
                         <input type="text" class="form-control" placeholder="Username Instagram" name="instagram" id="instagram">
                     </div>
+                    <small>Tulis username tanpa tanda '@'</small>
                 </div>
                 <div class="form-group">
                     <textarea name="bio" id="bio" class="form-control" placeholder="Bio"

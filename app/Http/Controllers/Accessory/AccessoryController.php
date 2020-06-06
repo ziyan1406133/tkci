@@ -123,10 +123,7 @@ class AccessoryController extends Controller
     {
         $name = $request->name;
 
-        $getAccessory = Accessory::findOrFail($id);
-        $accessory = $getAccessory->replicate();
-        $accessory->save();
-
+        $accessory = Accessory::findOrFail($id);
         $accessory->name = $name;
         // $accessory->slug = Str::slug($name, '-');
         $accessory->price = $request->price;

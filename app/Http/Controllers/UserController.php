@@ -53,12 +53,15 @@ class UserController extends Controller
         $this->validate($request, [
             'username' => 'unique:users,username',
             'email' => 'unique:users,email',
+            'image' => 'image|max:1999',
             'password1' => 'same:password'
         ],
         [
             'same' => 'Konfirmasi password tidak sesuai',
             'username.unique' => 'Username sudah digunakan',
-            'email.unique' => 'Email sudah digunakan'
+            'email.unique' => 'Email sudah digunakan',
+            'image.image' => 'File yang diupload harus berupa gambar',
+            'max' => 'Maksimum ukuran file yang diupload adalah 2 MB'
         ]);
 
         $admin = new User;
@@ -132,36 +135,48 @@ class UserController extends Controller
 
         if (($admin->email == $email) && ($admin->username == $username)) {
             $this->validate($request, [
+                'image' => 'image|max:1999',
                 'password1' => 'same:password'
             ],
             [
+                'image.image' => 'File yang diupload harus berupa gambar',
+                'max' => 'Maksimum ukuran file yang diupload adalah 2 MB',
                 'same' => 'Konfirmasi password tidak sesuai',
             ]);
         } elseif(($admin->email !== $email) && ($admin->username == $username)) {
             $this->validate($request, [
+                'image' => 'image|max:1999',
                 'email' => 'unique:users,email',
                 'password1' => 'same:password'
             ],
             [
+                'image.image' => 'File yang diupload harus berupa gambar',
+                'max' => 'Maksimum ukuran file yang diupload adalah 2 MB',
                 'same' => 'Konfirmasi password tidak sesuai',
                 'email.unique' => 'Email sudah digunakan'
             ]);
         } elseif(($admin->email == $email) && ($admin->username !== $username)) {
             $this->validate($request, [
+                'image' => 'image|max:1999',
                 'username' => 'unique:users,username',
                 'password1' => 'same:password'
             ],
             [
+                'image.image' => 'File yang diupload harus berupa gambar',
+                'max' => 'Maksimum ukuran file yang diupload adalah 2 MB',
                 'same' => 'Konfirmasi password tidak sesuai',
                 'username.unique' => 'Username sudah digunakan'
             ]);
         } else {
             $this->validate($request, [
+                'image' => 'image|max:1999',
                 'email' => 'unique:users,email',
                 'username' => 'unique:users,username',
                 'password1.unique' => 'same:password'
             ],
             [
+                'image.image' => 'File yang diupload harus berupa gambar',
+                'max' => 'Maksimum ukuran file yang diupload adalah 2 MB',
                 'same' => 'Konfirmasi password tidak sesuai',
                 'username.unique' => 'Username sudah digunakan',
                 'email.unique' => 'Email sudah digunakan'

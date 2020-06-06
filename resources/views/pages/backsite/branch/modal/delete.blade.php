@@ -1,7 +1,7 @@
 
 <!-- Modal -->
-<div class="modal fade" id="deleteGallery_{{$gallery->id}}" tabindex="-1" role="dialog" 
-    aria-labelledby="deleteGalleryLabel_{{$gallery->id}}" aria-hidden="true">
+<div class="modal fade" id="deleteBranch_{{$branch->id}}" tabindex="-1" role="dialog" 
+    aria-labelledby="deleteBranchLabel_{{$branch->id}}" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
         <div class="modal-header">
@@ -10,13 +10,15 @@
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <form action="{{route('gallery.destroy', $gallery->id)}}" method="post">
+        <form action="{{route('cabang.destroy', $branch->id)}}" method="post">
             @method('delete')
             @csrf
             <div class="modal-body">
                 <div class="form-group">
-                    Anda yakin untuk menghapus galeri berikut? <br>
-                    > {{ $gallery->name }}
+                    Anda yakin untuk menghapus cabang berikut? <br>
+                    > {{ $branch->branch_name }} <br> <br>
+                    Perhatian : dengan menghapus cabang ini, anda juga akan menghapus 
+                    seluruh informasi donasi yang diterima di cabang tersebut
                 </div>
             </div>
             <div class="modal-footer">

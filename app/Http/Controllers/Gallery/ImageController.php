@@ -71,6 +71,13 @@ class ImageController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'cover' => 'image',
+        ],
+        [
+            'cover.image' => 'File yang diupload harus berupa gambar'
+        ]);
+
         $gallery = Gallery::findOrFail($id);
         foreach ($request->file('images') as $item) {
 

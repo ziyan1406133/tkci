@@ -3,25 +3,24 @@
 @section('content')
 <div class="mb-4">
     <div class="pull-right">
-        <a href="#" data-toggle="modal" 
-            data-target="#addGallery"
+        <a href="{{ route('cabang.create') }}" 
             class="btn btn-md btn-primary" 
-            title="Tambah Gallery.">
+            title="Tambah Cabang.">
             <i class="fa fa-plus"></i>
         </a>
     </div>
-    <h4>Daftar Galeri</h4>
+    <h4>Daftar Cabang</h4>
 </div>
 
-@if (count($galleries) > 0)
+@if (count($branches) > 0)
     <div class="table-responsive m-b-40">
         <table class="table table-borderless table-data3">
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>Judul Galeri</th>
-                    <th>Dibuat Oleh</th>
-                    <th>Jumlah Gambar</th>
+                    <th>Nama Cabang</th>
+                    <th>Ketua Cabang</th>
+                    <th>Alamat</th>
                     <th>Opsi</th>
                 </tr>
             </thead>
@@ -29,25 +28,28 @@
                 @php
                     $no = 1;
                 @endphp
-                @foreach ($galleries as $gallery)
+                @foreach ($branches as $branch)
                     <tr>
                         <td>{{$no++}}</td>
-                        <td>{{$gallery->name}}</td>
-                        <td>{{$gallery->author->username}}</td>
-                        <td>{{count($gallery->images) + 1}}</td>
+                        <td>{{$branch->branch_name}}</td>
+                        <td>{{$branch->chairman_name}}</td>
+                        <td>
+                            Kec. {{ $branch->kecamatan->nama }},
+                            {{ $branch->kabupaten->nama }},
+                            {{ $branch->provinsi->nama }}
+                        </td>
                         <td>
                             <a class="btn btn-sm btn-info"  
-                                href="{{ route('admin.show.gallery', $gallery->slug) }}" title="Lihat Info Seller Ini.">
+                                href="{{ route('admin.show.cabang', $branch->slug) }}" title="Lihat Info Cabang Ini.">
                                 <i class="fa fa-info"></i>
                             </a>
-                            <a class="btn btn-sm btn-warning" href="#" data-toggle="modal" 
-                                data-target="#editGallery_{{$gallery->id}}"
+                            <a class="btn btn-sm btn-warning" href="{{ route('cabang.edit', $branch->id) }}"
                                 title="Edit Seller Ini.">
                                 <i class="fa fa-pencil-alt"></i>
                             </a>
                             <a class="btn btn-sm btn-danger" data-toggle="modal" 
-                                data-target="#deleteGallery_{{$gallery->id}}" 
-                                href="#" title="Hapus Seller Ini.">
+                                data-target="#deleteBranch_{{$branch->id}}" 
+                                href="#" title="Hapus Cabang Ini.">
                                 <i class="fa fa-trash"></i>
                             </a>
                         </td>
@@ -56,14 +58,12 @@
             </tbody>
         </table>
     </div>
-    @foreach ($galleries as $gallery)
-        @include('pages.backsite.gallery.modal.edit')
-        @include('pages.backsite.gallery.modal.delete')
+    @foreach ($branches as $branch)
+        @include('pages.backsite.branch.modal.delete')
     @endforeach
 @else
-    <p class="text-muted">Belum ada galeri yang dibuat.</p>
+    <p class="text-muted">Belum ada cabang yang dibuat.</p>
 @endif
-@include('pages.backsite.gallery.modal.add')
 @endsection
 
 @section('js')

@@ -61,6 +61,14 @@ class GalleryController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'cover' => 'image|max:1999',
+        ],
+        [
+            'cover.image' => 'File yang diupload harus berupa gambar',
+            'max' => 'Maksimum ukuran file yang diupload adalah 2 MB'
+        ]);
+
         $name = $request->name;
         // $slug = Str::slug($name, '-');
 
@@ -129,15 +137,19 @@ class GalleryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'cover' => 'image|max:1999',
+        ],
+        [
+            'cover.image' => 'File yang diupload harus berupa gambar',
+            'max' => 'Maksimum ukuran file yang diupload adalah 2 MB'
+        ]);
+        
         $name = $request->name;
         // $slug = Str::slug($name, '-');
 
-        $getGallery = Gallery::findOrFail($id);
-        $gallery = $getGallery->replicate();
-        $gallery->save();
-
+        $gallery = Gallery::findOrFail($id);
         $gallery->name = $name;
-        // $gallery->slug = $slug;
         
         if($request->hasFile('cover')){
 

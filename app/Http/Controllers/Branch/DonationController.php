@@ -1,24 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Article;
+namespace App\Http\Controllers\Branch;
 
 use App\Http\Controllers\Controller;
-use App\Model\Article\Category;
 use Illuminate\Http\Request;
-// use Illuminate\Support\Str;
 
-class CategoryController extends Controller
+class DonationController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth', $except = ['show']);
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -26,9 +14,17 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::orderBy('name')->get();
+        //
+    }
 
-        return view('pages.backsite.category.index', compact('categories'));
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function admin_index()
+    {
+        //
     }
 
     /**
@@ -49,15 +45,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $name = $request->name;
-        // $slug = Str::slug($name, '-');
-
-        $category = new Category;
-        $category->name = $name;
-        // $category->slug = $slug;
-        $category->save();
-
-        return redirect()->route('kategori.index')->with('success', 'Kategori Berhasil Ditambahkan');
+        //
     }
 
     /**
@@ -91,15 +79,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $name = $request->name;
-        // $slug = Str::slug($name, '-');
-
-        $category = Category::findOrFail($id);
-        $category->name = $name;
-        // $category->slug = $slug;
-        $category->save();
-
-        return redirect()->route('kategori.index')->with('success', 'Kategori Berhasil Diperbaharui');
+        //
     }
 
     /**
@@ -110,9 +90,6 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::findOrFail($id);
-        $category->delete();
-
-        return redirect()->route('kategori.index')->with('success', 'Kategori Berhasil Dihapus');
+        //
     }
 }
