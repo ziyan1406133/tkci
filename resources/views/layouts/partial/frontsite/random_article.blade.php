@@ -25,7 +25,7 @@
                     <a href="{{ route('artikel.show', $artikel->slug) }}" class="post-title">
                         <h6>
                             {{(strlen($artikel->title) > 100) ?
-                            substr($artikel->title, 100).".." :
+                            substr($artikel->title, 0, 100).".." :
                             ($artikel->title)}} 
                         </h6>
                     </a>

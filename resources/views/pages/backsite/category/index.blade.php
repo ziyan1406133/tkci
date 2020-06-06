@@ -32,8 +32,8 @@
                         <td>{{$category->name}}</td>
                         <td>{{count($category->articles)}}</td>
                         <td>
-                            <a class="btn btn-sm btn-info"  
-                                href="#" title="Lihat Artikel di Kategori Ini.">
+                            <a class="btn btn-sm btn-info" target="_blank"
+                                href="{{ route('kategori.show', $category->slug) }}" title="Lihat Artikel di Kategori Ini.">
                                 <i class="fa fa-info"></i>
                             </a>
                             @if ($category->id !== 1)

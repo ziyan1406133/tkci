@@ -16,6 +16,16 @@ use Map;
 class BranchController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['show', 'branch_map', 'getMap']]);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -149,12 +159,12 @@ class BranchController extends Controller
             $filename = pathInfo($filenameWithExt, PATHINFO_FILENAME);
             $extension = $request->file('image')->getClientOriginalExtension();
             $FileNameToStore = $filename.'_'.time().'_.'.$extension;
-            $path = public_path('images/article/');
+            $path = public_path('images/branch/');
             $request->file('image')->move($path, $FileNameToStore);
 
             //$path = $request->file('image')->storeAs('public/package/', $FileNameToStore);
 
-            $branch->image = "images/article/".$FileNameToStore;
+            $branch->image = "images/branch/".$FileNameToStore;
         }
         $branch->save();
 
@@ -293,12 +303,12 @@ class BranchController extends Controller
             $filename = pathInfo($filenameWithExt, PATHINFO_FILENAME);
             $extension = $request->file('image')->getClientOriginalExtension();
             $FileNameToStore = $filename.'_'.time().'_.'.$extension;
-            $path = public_path('images/article/');
+            $path = public_path('images/branch/');
             $request->file('image')->move($path, $FileNameToStore);
 
             //$path = $request->file('image')->storeAs('public/package/', $FileNameToStore);
 
-            $branch->image = "images/article/".$FileNameToStore;
+            $branch->image = "images/branch/".$FileNameToStore;
         }
         $branch->save();
 

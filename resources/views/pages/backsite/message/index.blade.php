@@ -35,7 +35,7 @@
                                 <i class="fa fa-trash"></i>
                             </a>
                         </td>
-                    </tr>
+                    </tr> 
                 @endforeach
             </tbody>
         </table>

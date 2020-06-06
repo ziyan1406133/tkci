@@ -26,7 +26,7 @@
                                     <p class="post-author">Seller : <a href="{{ route('seller.show', $acc->seller->slug) }}" >{{ $acc->seller->name }}</a></p>
                                     <p class="post-excerp">
                                         {{(strlen(strip_tags($acc->description)) > 300) ?
-                                        substr(strip_tags($acc->description), 300).".." :
+                                        substr(strip_tags($acc->description), 0, 300).".." :
                                         strip_tags($acc->description)}} 
                                     </p>
                                 </div>

@@ -39,7 +39,7 @@
                             {{ $branch->provinsi->nama }}
                         </td>
                         <td>
-                            <a class="btn btn-sm btn-info"  
+                            <a class="btn btn-sm btn-info" target="_blank"
                                 href="{{ route('cabang.show', $branch->slug) }}" title="Lihat Info Cabang Ini.">
                                 <i class="fa fa-info"></i>
                             </a>

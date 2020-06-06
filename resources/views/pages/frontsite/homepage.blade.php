@@ -14,39 +14,41 @@
 
                     <!-- Single Featured Post -->
                     <div class="col-12 col-lg-7">
-                        <div class="single-blog-post featured-post">
-                            <div class="post-thumb">
-                                <a href="{{ route('artikel.show', $satu_artikel->slug) }}">
-                                    <img src="{{ asset($satu_artikel->cover) }}" alt="">
-                                </a>
-                            </div>
-                            <div class="post-data">
-                                @forelse ($satu_artikel->categories as $kategori)
-                                    <a href="{{ route('kategori.show', $kategori->slug) }}" 
-                                        class="custom-category">
-                                        {{ $kategori->name }}
-                                    </a>{{$loop->last ? '' : ','}}
-                                @empty
-                                    <a href="{{ route('tanpa.kategori') }}" 
-                                        class="custom-category">
-                                        Tanpa Kategori
+                        @if($satu_artikel)
+                            <div class="single-blog-post featured-post">
+                                <div class="post-thumb">
+                                    <a href="{{ route('artikel.show', $satu_artikel->slug) }}">
+                                        <img src="{{ asset($satu_artikel->cover) }}" alt="">
                                     </a>
-                                @endforelse
-                                <a href="{{ route('artikel.show', $satu_artikel->slug) }}" class="post-title">
-                                    <h6>{{ $satu_artikel->title }}</h6>
-                                </a>
-                                <div class="post-meta">
-                                    @if ($satu_artikel->author)
-                                        <p class="post-author">By <a href="#">{{ $satu_artikel->author->name }}</a></p>
-                                    @endif
-                                    <p class="post-excerp">
-                                        {{(strlen(strip_tags($satu_artikel->content)) > 300) ?
-                                        substr(strip_tags($satu_artikel->content), 300).".." :
-                                        strip_tags($satu_artikel->content)}} 
-                                    </p>
+                                </div>
+                                <div class="post-data">
+                                    @forelse ($satu_artikel->categories as $kategori)
+                                        <a href="{{ route('kategori.show', $kategori->slug) }}" 
+                                            class="custom-category">
+                                            {{ $kategori->name }}
+                                        </a>{{$loop->last ? '' : ','}}
+                                    @empty
+                                        <a href="{{ route('tanpa.kategori') }}" 
+                                            class="custom-category">
+                                            Tanpa Kategori
+                                        </a>
+                                    @endforelse
+                                    <a href="{{ route('artikel.show', $satu_artikel->slug) }}" class="post-title">
+                                        <h6>{{ $satu_artikel->title }}</h6>
+                                    </a>
+                                    <div class="post-meta">
+                                        @if ($satu_artikel->author)
+                                            <p class="post-author">By <a href="#">{{ $satu_artikel->author->name }}</a></p>
+                                        @endif
+                                        <p class="post-excerp">
+                                            {{(strlen(strip_tags($satu_artikel->content)) > 300) ?
+                                            substr(strip_tags($satu_artikel->content), 0, 300).".." :
+                                            strip_tags($satu_artikel->content)}} 
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endif
                     </div>
 
                     <div class="col-12 col-lg-5">
@@ -74,7 +76,7 @@
                                         <a href="{{ route('artikel.show', $artikel->slug) }}" class="post-title">
                                             <h6>
                                                 {{(strlen($artikel->title) > 100) ?
-                                                substr($artikel->title, 100).".." :
+                                                substr($artikel->title, 0, 100).".." :
                                                 ($artikel->title)}} 
                                             </h6>
                                         </a>
@@ -111,7 +113,7 @@
                                 <a href="{{ route('artikel.show', $artikel->slug) }}" class="post-title">
                                     <h6>
                                         {{(strlen($artikel->title) > 100) ?
-                                        substr($artikel->title, 100).".." :
+                                        substr($artikel->title, 0, 100).".." :
                                         ($artikel->title)}} 
                                     </h6>
                                 </a>
@@ -159,7 +161,7 @@
                                     <a href="{{ route('artikel.show', $artikel->slug) }}" class="post-title">
                                         <h6>
                                             {{(strlen($artikel->title) > 100) ?
-                                            substr($artikel->title, 100).".." :
+                                            substr($artikel->title, 0, 100).".." :
                                             ($artikel->title)}} 
                                         </h6>
                                     </a>
@@ -191,7 +193,7 @@
                             <a href="{{ route('aksesoris.show', $merch->slug) }}" class="post-title">
                                 <h6>
                                     {{(strlen($merch->name) > 100) ?
-                                    substr($merch->name, 100).".." :
+                                    substr($merch->name, 0, 100).".." :
                                     ($merch->name)}} 
                                 </h6>
                             </a>

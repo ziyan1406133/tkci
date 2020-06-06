@@ -34,8 +34,8 @@
                         <td>Rp. {{number_format($accessory->price,0,",",".")}}</td>
                         <td>{{$accessory->seller->name}}</td>
                         <td>
-                            <a class="btn btn-sm btn-info"  
-                                href="#" title="Lihat Info Aksesoris Ini.">
+                            <a class="btn btn-sm btn-info" target="_blank"
+                                href="{{ route('aksesoris.show', $accessory->slug) }}" title="Lihat Info Aksesoris Ini.">
                                 <i class="fa fa-info"></i>
                             </a>
                             <a class="btn btn-sm btn-warning"  

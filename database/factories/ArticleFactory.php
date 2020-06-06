@@ -9,14 +9,13 @@ use Illuminate\Support\Str;
 
 $factory->define(Article::class, function (Faker $faker) {
     $title = $faker->text(25);
+    
     return [
         'title' => $title,
-        'slug' => Str::slug($title,'-'),
-        'content' => $faker->text(200),
+        'content' => $faker->paragraphs($nb = 5, $asText = true) ,
         'status' => 'Published',
         'cover' => 'images/article/no_cover.png',
         'date' => Carbon::now(),
-        'category_id' => $faker->numberBetween($min = 1, $max = 2),
         'author_id' => '1',
     ];
 });

@@ -33,7 +33,7 @@
                         <td>{{$admin->email}}</td>
                         <td>{{count($admin->published_articles)}}</td>
                         <td>
-                            <a class="btn btn-sm btn-info"  
+                            <a class="btn btn-sm btn-info"
                                 href="{{ route('admin.show', $admin->username) }}" title="Lihat Profil.">
                                 <i class="fa fa-info"></i>
                             </a>

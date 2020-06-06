@@ -24,8 +24,8 @@
             </h5>
             <p class="card-text">
                 {{(strlen(strip_tags($article->content)) > 100) ?
-                substr(strip_tags($article->content), 100).".." :
-                strip_tags($article->content)}}
+                    substr(strip_tags($article->content), 0, 100).".." :
+                    strip_tags($article->content)}}
             </p>
             <p class="card-text">
                 <small class="text-muted">

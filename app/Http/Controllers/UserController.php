@@ -17,8 +17,8 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('auth', $except = ['show']);
-        $this->middleware('super_admin', $except = ['show', 'edit', 'update']);
+        $this->middleware('auth', ['except' => ['show', 'show_author']]);
+        $this->middleware('super_admin', ['except' => ['show', 'edit', 'update', 'show_author']]);
     }
 
     /**

@@ -36,7 +36,7 @@
                                     @endif
                                     <p class="post-excerp">
                                         {{(strlen(strip_tags($article->content)) > 300) ?
-                                        substr(strip_tags($article->content), 300).".." :
+                                        substr(strip_tags($article->content), 0, 300).".." :
                                         strip_tags($article->content)}} 
                                     </p>
                                 </div>
