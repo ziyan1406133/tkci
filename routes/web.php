@@ -22,6 +22,7 @@ Auth::routes();
 Route::get('/dashboard', 'DashboardController@index')->name('admin.dashboard');
 Route::resource('artikel', 'Article\ArticleController');
 Route::get('/daftar_artikel', 'Article\ArticleController@admin_index')->name('admin.artikel');
+Route::get('/admin_search_artikel', 'Article\ArticleController@admin_search')->name('admin.search.artikel');
 Route::get('/daftar_artikel/{username}', 'Article\ArticleController@admin_article_index')->name('admins.article');
 Route::get('/artikel_saya', 'Article\ArticleController@my_articles')->name('my.articles');
 Route::get('/draft_saya', 'Article\ArticleController@my_drafts')->name('my.drafts');

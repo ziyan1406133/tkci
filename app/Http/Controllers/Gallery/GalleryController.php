@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Model\Gallery\Gallery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
+// use Illuminate\Support\Str;
 
 class GalleryController extends Controller
 {
@@ -62,11 +62,10 @@ class GalleryController extends Controller
     public function store(Request $request)
     {
         $name = $request->name;
-        $slug = Str::slug($name, '-');
+        // $slug = Str::slug($name, '-');
 
         $gallery = new Gallery;
         $gallery->name = $name;
-        $gallery->slug = $slug;
         $gallery->author_id = Auth::user()->id;
         
         $filenameWithExt = $request->file('cover')->getClientOriginalName();
@@ -83,7 +82,7 @@ class GalleryController extends Controller
 
         return redirect()->route('admin.gallery')
             ->with('success', 'Galeri Berhasil Dibuat, silahkan tambahkan 
-            gambar galeri tersebut <a href="'.route('admin.show.gallery', $slug).'">di sini</a>');
+            gambar galeri tersebut <a href="'.route('admin.show.gallery', $gallery->slug).'">di sini</a>');
     }
 
     /**
@@ -131,11 +130,14 @@ class GalleryController extends Controller
     public function update(Request $request, $id)
     {
         $name = $request->name;
-        $slug = Str::slug($name, '-');
+        // $slug = Str::slug($name, '-');
 
-        $gallery = Gallery::findOrFail($id);
+        $getGallery = Gallery::findOrFail($id);
+        $gallery = $getGallery->replicate();
+        $gallery->save();
+
         $gallery->name = $name;
-        $gallery->slug = $slug;
+        // $gallery->slug = $slug;
         
         if($request->hasFile('cover')){
 
@@ -157,7 +159,7 @@ class GalleryController extends Controller
         }
         $gallery->save();
 
-        return redirect()->route('admin.show.gallery', $slug)
+        return redirect()->route('admin.show.gallery', $gallery->slug)
             ->with('success', 'Galeri Berhasil Diperbaharui');
     }
 

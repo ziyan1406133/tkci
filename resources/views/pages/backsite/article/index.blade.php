@@ -2,12 +2,14 @@
 
 @section('content')
 <div class="mb-4">
-    <div class="pull-right">
-        <a href="{{route('artikel.create')}}" class="btn btn-md btn-primary" 
-            title="Buat Artikel Baru.">
-            <i class="fa fa-plus"></i>
-        </a>
-    </div>
+    @if ($page !== 'Hasil Pencarian')
+        <div class="pull-right">
+            <a href="{{route('artikel.create')}}" class="btn btn-md btn-primary" 
+                title="Buat Artikel Baru.">
+                <i class="fa fa-plus"></i>
+            </a>
+        </div>
+    @endif
     <h4>{!! $page !!}</h4>
 </div>
 <div class="card-columns">

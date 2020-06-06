@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Accessory;
 use App\Http\Controllers\Controller;
 use App\Model\Accessory\Seller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
+// use Illuminate\Support\Str;
 
 class SellerController extends Controller
 {
@@ -63,7 +63,8 @@ class SellerController extends Controller
 
         $seller = new Seller;
         $seller->name = $name;
-        $seller->slug = Str::slug($name, '-');
+        // $seller->slug = Str::slug($name, '-');
+
         $seller->code = $request->code;
         $seller->description = $request->description;
         $seller->email = $request->email;
@@ -122,9 +123,12 @@ class SellerController extends Controller
     {
         $name = $request->name;
 
-        $seller = Seller::findOrFail($id);
+        $getSeller = Seller::findOrFail($id);
+        $seller = $getSeller->replicate();
+        $seller->save();
+
         $seller->name = $name;
-        $seller->slug = Str::slug($name, '-');
+        // $seller->slug = Str::slug($name, '-');
         $seller->code = $request->code;
         $seller->description = $request->description;
         $seller->email = $request->email;

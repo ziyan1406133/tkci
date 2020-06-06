@@ -46,6 +46,23 @@ class ArticleController extends Controller
         return view('pages.backsite.article.index', compact('articles', 'page'));
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function admin_search(Request $request)
+    {
+        $keyword = $request->keyword;
+
+        $articles = Article::orderBy('created_at', 'desc')
+                    ->where('title', 'like', '%'.$keyword.'%')
+                    ->where('status', 'Published')->paginate(9);
+
+        $page = 'Hasil Pencarian';
+
+        return view('pages.backsite.article.index', compact('articles', 'page'));
+    }
 
     /**
      * Display a listing of the resource.
@@ -118,7 +135,7 @@ class ArticleController extends Controller
 
         $article = new Article;
         $article->title = $title;
-        $article->slug = Str::slug($title, '-');
+        // $article->slug = Str::slug($title, '-');
         $article->content = $request->content;
         $article->date = Carbon::now();
         $article->author_id = Auth::user()->id;
@@ -142,8 +159,10 @@ class ArticleController extends Controller
         $article->save();
 
         $last = Article::orderBy('created_at', 'desc')->where('author_id', Auth::user()->id)->first();
-        foreach ($request->categories as $category) {
-            $last->categories()->attach($category);
+        if($request->categories) {
+            foreach ($request->categories as $category) {
+                $last->categories()->attach($category);
+            }
         }
 
         if($draft !== 'on') {
@@ -201,11 +220,13 @@ class ArticleController extends Controller
         $draft = $request->draft;
         $title = $request->title;
 
-        $article = Article::findOrFail($id);
+        $getArticle = Article::findOrFail($id);
+        $article = $getArticle->replicate();
+        $article->save();
+        
         $article->categories()->detach();
-
         $article->title = $title;
-        $article->slug = Str::slug($title, '-');
+        // $article->slug = Str::slug($title, '-');
         $article->content = $request->content;
         $article->date = Carbon::now();
         $article->author_id = Auth::user()->id;
@@ -234,9 +255,10 @@ class ArticleController extends Controller
 
             $article->cover = "images/article/".$FileNameToStore;
         }
-
-        foreach ($request->categories as $category) {
-            $article->categories()->attach($category);
+        if($request->categories) {
+            foreach ($request->categories as $category) {
+                $article->categories()->attach($category);
+            }
         }
 
         $article->save();

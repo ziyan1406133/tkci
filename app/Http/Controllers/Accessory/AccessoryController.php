@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Model\Accessory\Accessory;
 use App\Model\Accessory\Seller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
+// use Illuminate\Support\Str;
 
 class AccessoryController extends Controller
 {
@@ -66,7 +66,7 @@ class AccessoryController extends Controller
 
         $accessory = new Accessory;
         $accessory->name = $name;
-        $accessory->slug = Str::slug($name, '-');
+        // $accessory->slug = Str::slug($name, '-');
         $accessory->price = $request->price;
         $accessory->description = $request->description;
         $accessory->seller_id = $request->seller_id;
@@ -123,9 +123,12 @@ class AccessoryController extends Controller
     {
         $name = $request->name;
 
-        $accessory = Accessory::findOrFail($id);
+        $getAccessory = Accessory::findOrFail($id);
+        $accessory = $getAccessory->replicate();
+        $accessory->save();
+
         $accessory->name = $name;
-        $accessory->slug = Str::slug($name, '-');
+        // $accessory->slug = Str::slug($name, '-');
         $accessory->price = $request->price;
         $accessory->description = $request->description;
         $accessory->seller_id = $request->seller_id;

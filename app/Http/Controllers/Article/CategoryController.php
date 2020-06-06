@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Article;
 use App\Http\Controllers\Controller;
 use App\Model\Article\Category;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
+// use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -50,11 +50,11 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $name = $request->name;
-        $slug = Str::slug($name, '-');
+        // $slug = Str::slug($name, '-');
 
         $category = new Category;
         $category->name = $name;
-        $category->slug = $slug;
+        // $category->slug = $slug;
         $category->save();
 
         return redirect()->route('kategori.index')->with('success', 'Kategori Berhasil Ditambahkan');
@@ -92,11 +92,14 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $name = $request->name;
-        $slug = Str::slug($name, '-');
+        // $slug = Str::slug($name, '-');
 
-        $category = Category::findOrFail($id);
+        $getCategory = Category::findOrFail($id);
+        $category = $getCategory->replicate();
+        $category->save();
+
         $category->name = $request->name;
-        $category->slug = $slug;
+        // $category->slug = $slug;
         $category->save();
 
         return redirect()->route('kategori.index')->with('success', 'Kategori Berhasil Diperbaharui');
