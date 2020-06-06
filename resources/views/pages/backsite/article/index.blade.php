@@ -57,7 +57,11 @@
             </div>
         </div>
     @empty
-        <p class="text-muted">Tidak ada apapun disini, silahkan buat artikel.</p>
+        @if ($page !== 'Hasil Pencarian')
+            <p class="text-muted">Tidak ada apapun disini, silahkan buat artikel.</p>
+        @else
+            <p class="text-muted">Pencarian tidak ditemukan.</p>
+        @endif
     @endforelse
 </div>
 <div class="pull-right">
