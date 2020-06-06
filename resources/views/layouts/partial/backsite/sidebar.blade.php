@@ -2,13 +2,23 @@
 <!-- MENU SIDEBAR-->
 <aside class="menu-sidebar d-none d-lg-block">
     <div class="logo">
-        <a href="/dashboard">
+        <a href="{{route('homepage')}}">
             <img src="{{asset('images/icon/logo.png')}}" alt="Cool Admin" />
         </a>
     </div>
     <div class="menu-sidebar__content js-scrollbar1">
         <nav class="navbar-sidebar">
             <ul class="list-unstyled navbar__list">
+                <li>
+                    <a href="{{route('homepage')}}">
+                        <i class="fas fa-home"></i>Homepage
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('admin.dashboard')}}">
+                        <i class="fas fa-table"></i>Dashboard
+                    </a>
+                </li>
                 <li class="has-sub">
                     <a class="js-arrow" href="#">
                         <i class="fas fa-newspaper"></i>Artikel</a>

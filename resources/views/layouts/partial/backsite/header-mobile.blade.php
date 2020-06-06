@@ -18,6 +18,16 @@
     <nav class="navbar-mobile">
         <div class="container-fluid">
             <ul class="navbar-mobile__list list-unstyled">
+                <li>
+                    <a href="{{route('homepage')}}">
+                        <i class="fas fa-home"></i>Homepage
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('admin.dashboard')}}">
+                        <i class="fas fa-table"></i>Dashboard
+                    </a>
+                </li>
                 <li class="has-sub">
                     <a class="js-arrow" href="#">
                         <i class="fas fa-newspaper"></i>Artikel</a>

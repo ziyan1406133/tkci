@@ -15,9 +15,8 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 //Guest Area
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'DashboardController@homepage')->name('homepage');
+
 
 //Admin Area
 Route::get('/dashboard', 'DashboardController@index')->name('admin.dashboard');

@@ -36,7 +36,7 @@
                                                 @forelse ($draft->categories as $category)
                                                     {{$category->name}} {{$loop->last ? '' : ','}}
                                                 @empty
-                                                    Uncategorized
+                                                    Tanpa Kategori
                                                 @endforelse
                                             </span>
                                         </div>

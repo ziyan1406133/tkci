@@ -36,17 +36,19 @@
                                 href="#" title="Lihat Artikel di Kategori Ini.">
                                 <i class="fa fa-info"></i>
                             </a>
-                            <a class="btn btn-sm btn-warning"  
-                                href="#" data-toggle="modal" 
-                                data-target="#editCategory_{{$category->id}}" 
-                                title="Edit Kategori Ini.">
-                                <i class="fa fa-pencil-alt"></i>
-                            </a>
-                            <a class="btn btn-sm btn-danger" data-toggle="modal" 
-                                data-target="#deleteCategory_{{$category->id}}" 
-                                href="#" title="Hapus Kategori Ini.">
-                                <i class="fa fa-trash"></i>
-                            </a>
+                            @if ($category->id !== 1)
+                                <a class="btn btn-sm btn-warning"  
+                                    href="#" data-toggle="modal" 
+                                    data-target="#editCategory_{{$category->id}}" 
+                                    title="Edit Kategori Ini.">
+                                    <i class="fa fa-pencil-alt"></i>
+                                </a>
+                                <a class="btn btn-sm btn-danger" data-toggle="modal" 
+                                    data-target="#deleteCategory_{{$category->id}}" 
+                                    href="#" title="Hapus Kategori Ini.">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            @endif
                         </td>
                     </tr>
                 @endforeach

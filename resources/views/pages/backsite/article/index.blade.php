@@ -50,7 +50,7 @@
                     @forelse ($article->categories as $category)
                         {{$category->name}} {{$loop->last ? '' : ','}}
                     @empty
-                        Uncategorized
+                        Tanpa Kategori
                     @endforelse
                 </small>
             </p>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Accessory\Accessory;
 use App\Model\Article\Article;
 use App\Model\Branch\Branch;
 use App\Model\Branch\Donation;
@@ -49,6 +50,13 @@ class DashboardController extends Controller
      */
     public function homepage()
     {
-        return view('pages.frontsite.homepage');
+        $satu_artikel = Article::where('status', 'Published')->orderBy('created_at', 'desc')->first();
+        $dua_artikel = Article::where('status', 'Published')->orderBy('created_at', 'desc')->skip(1)->take(2)->get();
+        $lima_artikel = Article::where('status', 'Published')->orderBy('created_at', 'desc')->skip(3)->take(5)->get();
+
+        $random_artikel = Article::where('status', 'Published')->inRandomOrder()->limit(4)->get();
+        $merchandise = Accessory::inRandomOrder()->limit(5)->get();
+
+        return view('pages.frontsite.homepage', compact('satu_artikel', 'dua_artikel', 'lima_artikel', 'random_artikel', 'merchandise'));
     }
 }
