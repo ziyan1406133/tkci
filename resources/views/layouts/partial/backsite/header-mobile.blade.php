@@ -54,7 +54,7 @@
                             <a href="{{ route('admin.donation') }}">Info Donasi</a>
                         </li>
                         <li>
-                            <a href="{{ route('branch.map') }}">Sebaran Lokasi</a>
+                            <a href="{{ route('peta.cabang.admin') }}">Sebaran Lokasi</a>
                         </li>
                     </ul>
                 </li>

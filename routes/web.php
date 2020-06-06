@@ -12,13 +12,14 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes();
 
+//Guest Area
 Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
-
+//Admin Area
 Route::get('/dashboard', 'DashboardController@index')->name('admin.dashboard');
 
 Route::resource('artikel', 'Article\ArticleController');
@@ -45,11 +46,11 @@ Route::resource('image', 'Gallery\ImageController');
 
 Route::resource('cabang', 'Branch\BranchController');
 Route::get('/daftar_cabang', 'Branch\BranchController@admin_index')->name('admin.cabang');
-Route::get('/lihat_cabang/{slug}', 'Branch\BranchController@admin_show')->name('admin.show.cabang');
+Route::get('/admin_peta_cabang', 'Branch\BranchController@admin_branch_map')->name('peta.cabang.admin');
 
 Route::resource('donasi', 'Branch\DonationController');
-Route::get('/daftar_donation', 'Branch\DonationController@admin_index')->name('admin.donation');
-Route::get('/peta_cabang', 'Branch\DonationController@branch_map')->name('branch.map');
+Route::get('/daftar_donasi', 'Branch\DonationController@admin_index')->name('admin.donation');
+Route::put('/hapus_donasi/{id}', 'Branch\DonationController@hapus_donasi')->name('donasi.hapus');
 
 Route::get('/json-kabupaten','WilayahController@kabupaten');
 Route::get('/json-kecamatan', 'WilayahController@kecamatan');

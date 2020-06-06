@@ -31,6 +31,9 @@
     <!-- Main CSS-->
     <link href="{{asset('css/theme.css')}}" rel="stylesheet" media="all">
     <link href="{{asset('css/custom.css')}}" rel="stylesheet" media="all">
+
+    @yield('head')
+
 <body class="animsition">
     <div class="page-wrapper">
         @include('layouts.partial.backsite.header-mobile')

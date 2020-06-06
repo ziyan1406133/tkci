@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Model\Gallery\Gallery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-// use Illuminate\Support\Str;
+use Illuminate\Support\Str;
 
 class GalleryController extends Controller
 {
@@ -70,7 +70,6 @@ class GalleryController extends Controller
         ]);
 
         $name = $request->name;
-        // $slug = Str::slug($name, '-');
 
         $gallery = new Gallery;
         $gallery->name = $name;
@@ -146,10 +145,11 @@ class GalleryController extends Controller
         ]);
         
         $name = $request->name;
-        // $slug = Str::slug($name, '-');
+        $slug = Str::slug($name, '-');
 
         $gallery = Gallery::findOrFail($id);
         $gallery->name = $name;
+        $gallery->slug = $slug;
         
         if($request->hasFile('cover')){
 

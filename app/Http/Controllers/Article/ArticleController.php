@@ -240,7 +240,7 @@ class ArticleController extends Controller
         $article->categories()->detach();
         
         $article->title = $title;
-        // $article->slug = Str::slug($title, '-');
+        $article->slug = Str::slug($title, '-');
         $article->content = $request->content;
         $article->date = Carbon::now();
         $article->author_id = Auth::user()->id;

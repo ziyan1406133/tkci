@@ -8,6 +8,8 @@ use App\Model\Wilayah\Kabupaten;
 use App\Model\Wilayah\Kecamatan;
 use App\Model\Wilayah\Provinsi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Map;
 
 class BranchController extends Controller
 {
@@ -38,9 +40,39 @@ class BranchController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function branch_map()
+    public function admin_branch_map()
     {
-        //
+        $branches = Branch::get();
+
+        $config = array();
+        $config['map_height'] = '550px';
+        $config['zoom'] = 'auto';
+        $config['draggableCursor'] = 'default';
+        Map::initialize($config);
+        
+        $config['cluster'] = FALSE;
+        $config['clusterStyles'] = array(
+            array(
+            "url"=>"https://raw.githubusercontent.com/googlemaps/js-marker-clusterer/gh-pages/images/m1.png",
+            "width"=>"53",
+            "height"=>"53"
+            ));
+        Map::initialize($config);
+        foreach($branches as $branch){
+            $total_donasi = 0;
+            foreach ($branch->donations as $donation) {
+                $total_donasi = $total_donasi + $donation->nominal;
+            }
+            $marker = array();
+            $marker['position'] = $branch->latitude.', '.$branch->longitude;
+            $marker['infowindow_content'] = '<div style="text-align: center"><strong>'.$branch->branch_name.'</strong><hr><img src="'.asset($branch->image).'"style="height: 100px"><br><br><a target="_blank" href="'.route('cabang.show',$branch->slug).'">Lihat Cabang</a><br><a target="_blank" href="https://www.google.com/maps/dir//'.$branch->latitude.','.$branch->longitude.'">Petunjuk Arah</a><br>Total Donasi : Rp. '.number_format($total_donasi,0,",",".").'</div>';
+            Map::add_marker($marker);
+        }
+
+        Map::initialize($config);
+        $map = Map::create_map();
+
+        return view('pages.backsite.branch.map', compact('map'));
     }
 
     /**
@@ -119,6 +151,17 @@ class BranchController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function admin_show($id)
+    {
+        //
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -157,6 +200,7 @@ class BranchController extends Controller
         $longitude = substr($request->input('longitude'), 0, 11);
 
         $branch = Branch::findOrFail($id);
+        $branch->slug = Str::slug($request->branch_name, '-');
         $branch->branch_name = $request->branch_name;
         $branch->latitude = $latitude;
         $branch->longitude = $longitude;

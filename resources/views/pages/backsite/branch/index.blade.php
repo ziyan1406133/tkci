@@ -40,7 +40,7 @@
                         </td>
                         <td>
                             <a class="btn btn-sm btn-info"  
-                                href="{{ route('admin.show.cabang', $branch->slug) }}" title="Lihat Info Cabang Ini.">
+                                href="{{ route('cabang.show', $branch->slug) }}" title="Lihat Info Cabang Ini.">
                                 <i class="fa fa-info"></i>
                             </a>
                             <a class="btn btn-sm btn-warning" href="{{ route('cabang.edit', $branch->id) }}"

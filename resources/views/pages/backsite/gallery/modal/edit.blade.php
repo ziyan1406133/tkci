@@ -21,7 +21,9 @@
                 <div class="form-group">
                     <label class="form-control-label">Gambar Cover</label>
                     <input type="file" class="form-control-file" name="cover" id="cover">
-                    <img src="{{ asset($gallery->cover) }}" alt="Gambar Cover">
+                    <div class="text-center">
+                        <img src="{{ asset($gallery->cover) }}" width="50%" alt="Gambar Cover">
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
