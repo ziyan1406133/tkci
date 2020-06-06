@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Accessory;
 
 use App\Http\Controllers\Controller;
 use App\Model\Accessory\Seller;
+use App\Model\Article\Article;
 use Illuminate\Http\Request;
 // use Illuminate\Support\Str;
 
@@ -95,9 +96,13 @@ class SellerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $seller = Seller::where('slug', $slug)->first();   
+
+        $random_artikel = Article::where('status', 'Published')->inRandomOrder()->limit(6)->get();
+        
+        return view('pages.frontsite.show_seller', compact('seller', 'random_artikel'));
     }
 
     /**

@@ -71,6 +71,11 @@
                         </li>
                     </ul>
                 </li>
+                <li>
+                    <a href="{{route('message.index')}}">
+                        <i class="fas fa-comments"></i> Pesan Pengunjung
+                    </a>
+                </li>
                 @if (auth()->user()->role == 'Super Admin')
                     <li>
                         <a href="{{route('admin.index')}}">

@@ -38,7 +38,7 @@
                             </a>
                             @if ($category->id !== 1)
                                 <a class="btn btn-sm btn-warning"  
-                                    href="#" data-toggle="modal" 
+                                    href="{{ route('kategori.show', $category->slug) }}" data-toggle="modal" 
                                     data-target="#editCategory_{{$category->id}}" 
                                     title="Edit Kategori Ini.">
                                     <i class="fa fa-pencil-alt"></i>

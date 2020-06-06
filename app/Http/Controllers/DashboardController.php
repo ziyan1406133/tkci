@@ -59,4 +59,9 @@ class DashboardController extends Controller
 
         return view('pages.frontsite.homepage', compact('satu_artikel', 'dua_artikel', 'lima_artikel', 'random_artikel', 'merchandise'));
     }
+
+    public function contact()
+    {
+        return view('pages.frontsite.contact');
+    }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Article;
 
 use App\Http\Controllers\Controller;
 use App\Model\Article\Category;
+use App\Model\Article\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -66,9 +67,38 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $category = Category::where('slug', $slug)->first();
+
+        $id = $category->id;
+
+        $articles = Article::where('status', 'Published')
+                    ->whereHas('categories', function($query) use ($id) {
+                        $query->where('categories.id', $id);
+                    })
+                    ->orderBy('created_at', 'desc')->paginate(5);
+
+        $random_artikel = Article::where('status', 'Published')->inRandomOrder()->limit(6)->get();
+        
+        return view('pages.frontsite.article.index', compact('articles', 'random_artikel'));
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function tanpa_kategori()
+    {
+
+        $articles = Article::where('status', 'Published')
+                    ->doesnthave('categories')
+                    ->orderBy('created_at', 'desc')->paginate(5);
+
+        $random_artikel = Article::where('status', 'Published')->inRandomOrder()->limit(6)->get();
+        
+        return view('pages.frontsite.article.index', compact('articles', 'random_artikel'));
     }
 
     /**

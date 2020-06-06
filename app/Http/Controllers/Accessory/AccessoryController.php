@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Accessory;
 use App\Http\Controllers\Controller;
 use App\Model\Accessory\Accessory;
 use App\Model\Accessory\Seller;
+use App\Model\Article\Article;
 use Illuminate\Http\Request;
 // use Illuminate\Support\Str;
 
@@ -39,7 +40,11 @@ class AccessoryController extends Controller
      */
     public function index()
     {
-        //
+        $accessories = Accessory::orderBy('created_at', 'desc')->paginate(5);
+
+        $random_artikel = Article::where('status', 'Published')->inRandomOrder()->limit(6)->get();
+        
+        return view('pages.frontsite.accessory.index', compact('accessories', 'random_artikel'));
     }
 
     /**
@@ -93,9 +98,13 @@ class AccessoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $accessory = Accessory::where('slug', $slug)->first();   
+
+        $random_artikel = Article::where('status', 'Published')->inRandomOrder()->limit(6)->get();
+        
+        return view('pages.frontsite.accessory.show', compact('accessory', 'random_artikel'));
     }
 
     /**

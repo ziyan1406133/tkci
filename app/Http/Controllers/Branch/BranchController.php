@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Branch;
 
 use App\Http\Controllers\Controller;
+use App\Model\Article\Article;
 use App\Model\Branch\Branch;
+use App\Model\Branch\Donation;
 use App\Model\Wilayah\Kabupaten;
 use App\Model\Wilayah\Kecamatan;
 use App\Model\Wilayah\Provinsi;
@@ -42,6 +44,25 @@ class BranchController extends Controller
      */
     public function admin_branch_map()
     {
+        $map = $this->getMap();
+
+        return view('pages.backsite.branch.map', compact('map'));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function branch_map()
+    {
+        $map = $this->getMap();
+
+        return view('pages.frontsite.map', compact('map'));
+    }
+
+    public function getMap() {
+
         $branches = Branch::get();
 
         $config = array();
@@ -72,8 +93,9 @@ class BranchController extends Controller
         Map::initialize($config);
         $map = Map::create_map();
 
-        return view('pages.backsite.branch.map', compact('map'));
+        return $map;
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -145,9 +167,52 @@ class BranchController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $branch = Branch::where('slug', $slug)->first();
+
+        $tahun_unik = Donation::where('branch_id', $branch->id)->distinct()->get(['year']);
+
+        $sortirDonasi = array();
+        foreach ($tahun_unik as $tahun) {
+            
+            $getDonasi = Donation::where('branch_id', $branch->id)->where('year', $tahun['year'])->get();
+
+            foreach ($getDonasi as $donasi) {
+                $sortirDonasi[$donasi->year] = $getDonasi;
+            }
+        }
+
+        $config = array();
+        $config['center'] = $branch->latitude.', '.$branch->longitude;
+        $config['map_height'] = '200px';
+        $config['zoom'] = '15';
+        $config['draggableCursor'] = 'default';
+        Map::initialize($config);
+        
+        $config['cluster'] = FALSE;
+        $config['clusterStyles'] = array(
+            array(
+            "url"=>"https://raw.githubusercontent.com/googlemaps/js-marker-clusterer/gh-pages/images/m1.png",
+            "width"=>"53",
+            "height"=>"53"
+            ));
+        Map::initialize($config);
+        $total_donasi = 0;
+        foreach ($branch->donations as $donation) {
+            $total_donasi = $total_donasi + $donation->nominal;
+        }
+        $marker = array();
+        $marker['position'] = $branch->latitude.', '.$branch->longitude;
+        $marker['infowindow_content'] = '<div style="text-align: center"><a target="_blank" href="https://www.google.com/maps/dir//'.$branch->latitude.','.$branch->longitude.'">Petunjuk Arah</a><br>Total Donasi : Rp. '.number_format($total_donasi,0,",",".").'</div>';
+        Map::add_marker($marker);
+
+        Map::initialize($config);
+        $map = Map::create_map();
+
+        $random_artikel = Article::where('status', 'Published')->inRandomOrder()->limit(6)->get();
+        
+        return view('pages.frontsite.show_branch', compact('branch', 'random_artikel', 'map', 'sortirDonasi'));
     }
 
     /**

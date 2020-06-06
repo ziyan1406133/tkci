@@ -20,7 +20,7 @@ class ArticleController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', $except = ['show', 'index']);
+        $this->middleware('auth', $except = ['show', 'index', 'search']);
     }
 
     /**
@@ -30,7 +30,11 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        $articles = Article::where('status', 'Published')->orderBy('created_at', 'desc')->paginate(5);
+
+        $random_artikel = Article::where('status', 'Published')->inRandomOrder()->limit(6)->get();
+        
+        return view('pages.frontsite.article.index', compact('articles', 'random_artikel'));
     }
 
     /**
@@ -44,6 +48,24 @@ class ArticleController extends Controller
 
         $page = 'Semua Artikel';
         return view('pages.backsite.article.index', compact('articles', 'page'));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        $keyword = $request->keyword;
+
+        $articles = Article::orderBy('created_at', 'desc')
+                    ->where('title', 'like', '%'.$keyword.'%')
+                    ->where('status', 'Published')->paginate(5);
+
+        $random_artikel = Article::where('status', 'Published')->inRandomOrder()->limit(6)->get();
+
+        return view('pages.frontsite.article.index', compact('articles', 'random_artikel'));
     }
 
     /**
@@ -79,6 +101,24 @@ class ArticleController extends Controller
         $page = 'Artikel <a href="'.route('admin.show', $username).'">@'.$username.'</a>';
         return view('pages.backsite.article.index', compact('articles', 'page'));
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function article_index($username)
+    {
+        $admin = User::where('username', $username)->first();
+       
+        $articles_paginated =  $admin->setRelation('published_articles_paginated', $admin->published_articles()->paginate(5));
+        $articles = $admin->published_articles_paginated;
+        
+        $random_artikel = Article::where('status', 'Published')->inRandomOrder()->limit(6)->get();
+
+        return view('pages.frontsite.article.index', compact('articles', 'random_artikel'));
+    }
+
 
     /**
      * Display a listing of the resource.
@@ -189,9 +229,13 @@ class ArticleController extends Controller
      */
     public function show($slug)
     {
-        //
-    }
+        $article = Article::where('slug', $slug)->first();
+        
+        $random_artikel = Article::where('status', 'Published')->inRandomOrder()->limit(6)->get();
 
+        return view('pages.frontsite.article.show', compact('article', 'random_artikel'));
+    }
+    
     /**
      * Show the form for editing the specified resource.
      *

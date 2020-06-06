@@ -3,6 +3,11 @@
 @section('content')
     <div class="mb-4">
         <div class="pull-right">
+            <a href="{{ route('gallery.show', $gallery->slug) }}" 
+                class="btn btn-md btn-info" 
+                title="Lihat di Frontsite">
+                <i class="fa fa-info"></i>
+            </a>
             <a href="#" class="btn btn-md btn-primary" 
                 data-toggle="modal" 
                 data-target="#addImage" 

@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Model\Article\Article;
 
 class UserController extends Controller
 {
@@ -101,6 +102,22 @@ class UserController extends Controller
         $admin = User::where('username', $username)->first();
         return view('pages.backsite.admin.show', compact('admin'));
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show_author($username)
+    {
+        $admin = User::where('username', $username)->first();
+        
+        $random_artikel = Article::where('status', 'Published')->inRandomOrder()->limit(6)->get();
+
+        return view('pages.frontsite.show_author', compact('admin', 'random_artikel'));
+    }
+
 
     /**
      * Show the form for editing the specified resource.

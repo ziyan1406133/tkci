@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Gallery;
 
 use App\Http\Controllers\Controller;
 use App\Model\Gallery\Gallery;
+use App\Model\Article\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -27,7 +28,11 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        //
+        $galleries = Gallery::orderBy('created_at', 'desc')->paginate(5);
+
+        $random_artikel = Article::where('status', 'Published')->inRandomOrder()->limit(6)->get();
+
+        return view('pages.frontsite.gallery.index', compact('galleries', 'random_artikel'));
     }
 
     /**
@@ -98,9 +103,12 @@ class GalleryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $gallery = Gallery::where('slug', $slug)->first();
+        $random_artikel = Article::where('status', 'Published')->inRandomOrder()->limit(6)->get();
+
+        return view('pages.frontsite.gallery.show', compact('gallery', 'random_artikel'));
     }
 
     /**

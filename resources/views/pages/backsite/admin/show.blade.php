@@ -44,6 +44,10 @@
                 <div class="card-header">
                     @if (($admin->role == 'Super Admin') || (Auth::user()->id == $admin->id))
                         <div class="pull-right">
+                            <a href="{{ route('author.show', $admin->username) }}" class="btn btn-md btn-info" 
+                                title="Edit Akun">
+                                <i class="fa fa-info"></i>
+                            </a>
                             <a href="{{ route('admin.edit', $admin->id) }}" class="btn btn-md btn-primary" 
                                 title="Edit Akun">
                                 <i class="fa fa-pencil-alt"></i>

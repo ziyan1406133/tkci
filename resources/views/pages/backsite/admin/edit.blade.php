@@ -53,13 +53,15 @@
                     <input type="email" name="email" id="email" value="{{ $admin->email }}"
                     placeholder="Email Admin" class="form-control" required>
                 </div>
-                <div class="form-group">
-                    <input type="password" name="password" id="password" minlength="8"  placeholder="Password*" class="form-control">
-                </div>
-                <div class="form-group">
-                    <input type="password" name="password1" id="password1" minlength="8" placeholder="Konfirmasi Password*" class="form-control">
-                </div>
-                <small>*) Kosongkan jika tidak ingin mengganti password.</small>
+                @if ($admin->id == auth()->user()->id)
+                    <div class="form-group">
+                        <input type="password" name="password" id="password" minlength="8"  placeholder="Password*" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password1" id="password1" minlength="8" placeholder="Konfirmasi Password*" class="form-control">
+                    </div>
+                    <small>*) Kosongkan jika tidak ingin mengganti password.</small>
+                @endif
                 <div class="form-group">
                     <label class="form-control-label">Foto Profil</label>
                     <input type="file" name="image" id="image" class="form-control-file">

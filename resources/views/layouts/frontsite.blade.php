@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title> Tokyo Kijang Club Indonesia</title>
+    <title> Toyota Kijang Club Indonesia</title>
 
     <link rel="icon" href="{{asset('images/logo.jpg')}}">
 
@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="{{ asset('css/nice-select.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/owl-carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/frontsite-style.css') }}">
+    <link href="{{asset('css/custom.css')}}" rel="stylesheet" media="all">
 
     @yield('head')
 

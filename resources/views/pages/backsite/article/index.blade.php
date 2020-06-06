@@ -18,7 +18,9 @@
             <img class="card-img-top" src="{{asset($article->cover)}}" alt="Cover Artikel">
             <div class="card-body">
             <h5 class="card-title">
-                {{$article->title}}
+                <a href="{{ route('artikel.show', $article->slug) }}">
+                    {{$article->title}}
+                </a>
             </h5>
             <p class="card-text">
                 {{(strlen(strip_tags($article->content)) > 100) ?

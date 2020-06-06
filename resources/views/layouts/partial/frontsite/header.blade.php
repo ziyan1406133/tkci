@@ -19,8 +19,9 @@
                             </div>
                             <!-- Search Form -->
                             <div class="search-form">
-                                <form action="#" method="post">
-                                    <input type="search" name="search" class="form-control" placeholder="Cari Artikel...">
+                                <form action="{{ route('search.article') }}" method="get">
+                                    @csrf
+                                    <input type="text" name="keyword" class="form-control" placeholder="Cari Artikel...">
                                     <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                                 </form>
                             </div>
@@ -68,24 +69,15 @@
                                                     >{{ $kategori->name }}</a>
                                             </li>
                                         @endforeach
-                                        <li><a href="#">Tanpa Kategori</a></li>
+                                        <li><a href="{{ route('tanpa.kategori') }}">Tanpa Kategori</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="#">Cabang TKCI</a>
-                                    <ul class="dropdown">
-                                        <li><a href="#">Sebaran Lokasi</a></li>
-                                        @foreach ($daftar_cabang as $cabang)
-                                            <li>
-                                                <a href="{{ route('kategori.show', $cabang->slug) }}"
-                                                    >{{ $cabang->branch_name }}</a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </li>
-                                <li><a href="#">Semua Artikel</a></li>
-                                <li><a href="#">Merchandise</a></li>
-                                <li><a href="#">Pengumuman</a></li>
-                                <li><a href="#">Contact</a></li>
+                                <li><a href="{{ route('artikel.index') }}">Semua Artikel</a></li>
+                                <li><a href="{{ route('peta.cabang') }}">Peta Cabang</a></li>
+                                <li><a href="{{ route('aksesoris.index') }}">Merchandise</a></li>
+                                <li><a href="{{ route('gallery.index') }}">Galeri</a></li>
+                                <li><a href="{{ route('kategori.show', 'pengumuman') }}">Pengumuman</a></li>
+                                <li><a href="{{ route('contact') }}">Contact</a></li>
                             </ul>
                         </div>
                         <!-- Nav End -->

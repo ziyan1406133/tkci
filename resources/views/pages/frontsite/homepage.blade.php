@@ -21,17 +21,24 @@
                                 </a>
                             </div>
                             <div class="post-data">
-                                @foreach ($satu_artikel->categories as $kategori)
+                                @forelse ($satu_artikel->categories as $kategori)
                                     <a href="{{ route('kategori.show', $kategori->slug) }}" 
                                         class="custom-category">
                                         {{ $kategori->name }}
                                     </a>{{$loop->last ? '' : ','}}
-                                @endforeach
+                                @empty
+                                    <a href="{{ route('tanpa.kategori') }}" 
+                                        class="custom-category">
+                                        Tanpa Kategori
+                                    </a>
+                                @endforelse
                                 <a href="{{ route('artikel.show', $satu_artikel->slug) }}" class="post-title">
                                     <h6>{{ $satu_artikel->title }}</h6>
                                 </a>
                                 <div class="post-meta">
-                                    <p class="post-author">By <a href="#">{{ $satu_artikel->author->name }}</a></p>
+                                    @if ($satu_artikel->author)
+                                        <p class="post-author">By <a href="#">{{ $satu_artikel->author->name }}</a></p>
+                                    @endif
                                     <p class="post-excerp">
                                         {{(strlen(strip_tags($satu_artikel->content)) > 300) ?
                                         substr(strip_tags($satu_artikel->content), 300).".." :
@@ -52,12 +59,17 @@
                                     </a>
                                 </div>
                                 <div class="post-data">
-                                    @foreach ($artikel->categories as $kategori)
+                                    @forelse ($artikel->categories as $kategori)
                                         <a href="{{ route('kategori.show', $kategori->slug) }}" 
                                             class="custom-category">
                                             {{ $kategori->name }}
                                         </a>{{$loop->last ? '' : ','}}
-                                    @endforeach
+                                    @empty
+                                        <a href="{{ route('tanpa.kategori') }}" 
+                                            class="custom-category">
+                                            Tanpa Kategori
+                                        </a>
+                                    @endforelse
                                     <div class="post-meta">
                                         <a href="{{ route('artikel.show', $artikel->slug) }}" class="post-title">
                                             <h6>
@@ -84,12 +96,17 @@
                             </a>
                         </div>
                         <div class="post-data">
-                            @foreach ($artikel->categories as $kategori)
+                            @forelse ($artikel->categories as $kategori)
                                 <a href="{{ route('kategori.show', $kategori->slug) }}" 
                                     class="custom-category">
                                     {{ $kategori->name }}
                                 </a>{{$loop->last ? '' : ','}}
-                            @endforeach
+                            @empty
+                                <a href="{{ route('tanpa.kategori') }}" 
+                                    class="custom-category">
+                                    Tanpa Kategori
+                                </a>
+                            @endforelse
                             <div class="post-meta">
                                 <a href="{{ route('artikel.show', $artikel->slug) }}" class="post-title">
                                     <h6>
@@ -128,12 +145,17 @@
                                     <img src="{{ asset($artikel->cover) }}" alt="">
                                 </a>
                                 <div class="post-data">
-                                    @foreach ($artikel->categories as $kategori)
+                                    @forelse ($artikel->categories as $kategori)
                                         <a href="{{ route('kategori.show', $kategori->slug) }}" 
                                             class="custom-category">
                                             {{ $kategori->name }}
                                         </a>{{$loop->last ? '' : ','}}
-                                    @endforeach
+                                    @empty
+                                        <a href="{{ route('tanpa.kategori') }}" 
+                                            class="custom-category">
+                                            Tanpa Kategori
+                                        </a>
+                                    @endforelse
                                     <a href="{{ route('artikel.show', $artikel->slug) }}" class="post-title">
                                         <h6>
                                             {{(strlen($artikel->title) > 100) ?
