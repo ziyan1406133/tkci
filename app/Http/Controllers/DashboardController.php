@@ -64,4 +64,18 @@ class DashboardController extends Controller
     {
         return view('pages.frontsite.contact');
     }
+
+    public function test_query()
+    {
+        $test = Article::where(function($q) {
+                            $q->where('nomor', 1)
+                            ->where('id_atribut', 'A01');
+                        })->orWhere(function($q) {
+                            $q->where('nomor', 1)
+                            ->where('id_atribut', 'A09')
+                            ->where('id_nilai', '9');
+                        })->get();
+
+        return $test;
+    }
 }

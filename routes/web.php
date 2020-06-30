@@ -58,3 +58,5 @@ Route::resource('message', 'MessageController');
 
 Route::get('/json-kabupaten','WilayahController@kabupaten');
 Route::get('/json-kecamatan', 'WilayahController@kecamatan');
+
+Route::get('/test-query', 'DashboardController@test_query')->name('test.query');
