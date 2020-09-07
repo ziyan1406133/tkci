@@ -208,5 +208,5 @@ $('#kabupaten').on('change', function(e){
         });
     }
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAf7FALA_C8nQFFy1A8D6NWavSyS_rqIBc&callback=myMap"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmn7gShOLqN1352QVc-bEGuaIRkzEoPJ8callback=myMap"></script>
 @endsection
